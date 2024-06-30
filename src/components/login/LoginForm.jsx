@@ -117,8 +117,8 @@ const LoginForm = () => {
             src="/image/dev.gif"
             alt="Colorful abstract painting"
             style={{
-              width: "50%",
-              height: "50%",
+              width: "65%",
+              height: "60%",
               objectFit: "cover",
               borderRadius: "100px",
               maxHeight: "100vh",
