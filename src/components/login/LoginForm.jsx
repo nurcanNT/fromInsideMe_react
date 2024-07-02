@@ -114,7 +114,7 @@ const LoginForm = () => {
           }}
         >
           <img
-            src="/image/dev.gif"
+            src=""
             alt="Colorful abstract painting"
             style={{
               width: "65%",
