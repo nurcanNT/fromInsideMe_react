@@ -117,7 +117,7 @@ const LoginForm = () => {
             src=""
             alt="Colorful abstract painting"
             style={{
-              width: "65%",
+              width: "45%",
               height: "60%",
               objectFit: "cover",
               borderRadius: "100px",
