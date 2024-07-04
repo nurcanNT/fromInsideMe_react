@@ -1,12 +1,13 @@
 import React from "react";
-import { Nav } from "./MenuStyle";
+import { AvatarContainer, Nav } from "./MenuStyle";
 import { NavItem } from "./MenuStyle";
 import { StyledNavLink } from "./MenuStyle";
+import Avatar from '@mui/material/Avatar';
 
 const MenuHeader = () => {
   return (
     <Nav>
-      <ul>
+     <ul>
         <NavItem>
           <StyledNavLink exact to="/homePage/HomePage">
             Home Page
@@ -25,8 +26,12 @@ const MenuHeader = () => {
         <NavItem>
           <StyledNavLink to="/">Exit</StyledNavLink>
         </NavItem>
-      </ul>
+        <AvatarContainer>
+        <Avatar sx={{ width: '25px', height: '25px', }} src="/broken-image.jpg" />
+        </AvatarContainer>
+        </ul>
     </Nav>
+    
   );
 };
 
