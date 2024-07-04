@@ -39,3 +39,5 @@ export const StyledNavLink = styled(NavLink)`
     }
   }
 `;
+
+export const AvatarContainer = styled.div` margin-left: auto;`;
