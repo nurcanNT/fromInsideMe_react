@@ -30,7 +30,7 @@ const MenuHeader = () => {
         </NavItem>
         <NavItem>
           <StyledNavLink exact to="/list/ListPage">
-            List
+            List Page
           </StyledNavLink>
         </NavItem>
         <NavItem>
