@@ -4,6 +4,7 @@ import { NavItem } from "./MenuStyle";
 import { StyledNavLink } from "./MenuStyle";
 import Avatar from '@mui/material/Avatar';
 import SvgIcon from '@mui/material/SvgIcon';
+import { useSelector } from 'react-redux';
 
 function HomeIcon(props) {
   return (
@@ -14,6 +15,8 @@ function HomeIcon(props) {
 }
 
 const MenuHeader = () => {
+  const user = useSelector(state => state.auth.user);
+
   return (
     <Nav>
      <ul>
@@ -38,6 +41,7 @@ const MenuHeader = () => {
         </NavItem>
         <AvatarContainer>
         <Avatar sx={{ width: '25px', height: '25px', }} src="/broken-image.jpg" />
+        {user && <span >{user.username}</span>}
         </AvatarContainer>
         </ul>
     </Nav>
