@@ -18,15 +18,20 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import SettingsBrightnessIcon from "@mui/icons-material/SettingsBrightness";
 import { Link, Link as RouterLink, useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { login } from '../../actions'
 
 const LoginForm = () => {
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [darkMode, setDarkMode] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [usernameValidationError, setUsernameValidationError] = useState("");
   const [passwordValidationError, setPasswordValidationError] = useState("");
   const [emailValidationError, setEmailValidationError] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const toggleDarkMode = () => {
     setDarkMode((prevDarkMode) => !prevDarkMode);
@@ -37,6 +42,11 @@ const LoginForm = () => {
       mode: darkMode ? "dark" : "light",
     },
   });
+
+  const handleLogin = () => {
+    const user = { username, password };
+    dispatch(login(user));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -151,6 +161,20 @@ const LoginForm = () => {
                 margin="normal"
                 required
                 fullWidth
+                id="username"
+                label="Username"
+                name="username"
+                autoComplete="username"
+                autoFocus
+                value={username}
+                error={usernameValidationError !== ""}
+                helperText={usernameValidationError}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
                 id="email"
                 label="Email Address"
                 name="email"
@@ -173,7 +197,7 @@ const LoginForm = () => {
                 value={password}
                 error={passwordValidationError !== ""}
                 helperText={passwordValidationError}
-                onChange={handlePasswordChange}
+                onChange={(e) => setPassword(e.target.value)}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
@@ -196,6 +220,7 @@ const LoginForm = () => {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
+                onClick={handleLogin}
                 disabled={
                   passwordValidationError !== "" || emailValidationError !== ""
                 }

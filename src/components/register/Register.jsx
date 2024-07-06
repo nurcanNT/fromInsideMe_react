@@ -16,8 +16,11 @@ import {
 } from "@mui/material";
 import cities from "../../cities.json";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { useDispatch } from 'react-redux';
+import { register } from '../../actions'
 
 const Register = () => {
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState("");
   const [city, setCity] = useState("");
   const [password, setPassword] = useState("");
@@ -27,6 +30,12 @@ const Register = () => {
   const [passwordValidationError, setPasswordValidationError] = useState("");
   const [emailValidationError, setEmailValidationError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
+  const dispatch = useDispatch();
+
+  const handleRegister = () => {
+    const user = { username, password };
+    dispatch(register(user));
+  };
 
   const handlePasswordChange = (event) => {
     const newPassword = event.target.value;
@@ -126,6 +135,20 @@ const Register = () => {
           Register
         </Typography>
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
+        <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="username"
+            label="Username"
+            name="username"
+            autoComplete="username"
+            autoFocus
+            value={username}
+            error={emailValidationError !== ""}
+            helperText={emailValidationError}
+            onChange={(e) => setUsername(e.target.value)}
+          />
           <TextField
             margin="normal"
             required
@@ -172,7 +195,7 @@ const Register = () => {
             value={password}
             error={passwordValidationError !== ""}
             helperText={passwordValidationError}
-            onChange={handlePasswordChange}
+            onChange={(e) => setPassword(e.target.value)}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
@@ -217,6 +240,7 @@ const Register = () => {
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
+            onClick={handleRegister}
             disabled={
               passwordValidationError !== "" || confirmPasswordError !== ""
             }
