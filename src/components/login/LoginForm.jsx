@@ -22,7 +22,7 @@ import { useDispatch } from 'react-redux';
 import { login } from '../../actions'
 
 const LoginForm = () => {
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [darkMode, setDarkMode] = useState(false);
