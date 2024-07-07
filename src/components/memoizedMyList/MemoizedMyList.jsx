@@ -1,12 +1,13 @@
 import { Button } from "@mui/material";
-import React, { memo, useEffect, useMemo } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { styles } from "./MemoizedMyStyles";
 
 const MemoizedMyList = memo(({ exampleData }) => {
-  const myList = useMemo(
-    () => JSON.parse(localStorage.getItem("myList")) || [],
-    []
-  );
+
+  const [myList, setMyList] = useState(() => {
+    const storedList = JSON.parse(localStorage.getItem("myList"));
+    return storedList ? storedList : exampleData;
+  });
 
   useEffect(() => {
     localStorage.setItem("myList", JSON.stringify(myList));
@@ -15,7 +16,7 @@ const MemoizedMyList = memo(({ exampleData }) => {
   const handleDelete = (index) => {
     const newUserList = [...myList];
     newUserList.splice(index, 1);
-    localStorage.setItem("myList", JSON.stringify(newUserList));
+    setMyList(newUserList);
   };
 
   return (
@@ -30,7 +31,7 @@ const MemoizedMyList = memo(({ exampleData }) => {
         </tr>
       </thead>
       <tbody>
-        {exampleData.map((user, index) => (
+        {myList.map((user, index) => (
           <tr key={index} style={{ borderBottom: "1px solid #f0f0f0" }}>
             <td style={styles.cell}>{user.rumuz}</td>
             <td style={styles.cell}>{user.email}</td>

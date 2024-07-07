@@ -1,18 +1,25 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import MenuHeader from "../menu/MenuHeader";
 import { Box, TextField, Button, Typography } from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { styles } from "./MyContentsStyle";
 import MemoizedMyList from "../memoizedMyList/MemoizedMyList";
-import { exampleData } from "../../exampleData";
+import { useSelector } from "react-redux";
 
 const MyContents = () => {
+  const userEmail = useSelector(state => state.auth.user?.email);
+
+  const [myList, setMyList] = useState(() => {
+    return JSON.parse(localStorage.getItem("myList")) || [];
+  });
+
   const formik = useFormik({
     initialValues: {
       rumuz: "",
+      email: userEmail || "",
+      city: "",
       infoText: "",
-      email: "",
     },
     validationSchema: Yup.object({
       rumuz: Yup.string().required("Rumuz is required"),
@@ -21,15 +28,13 @@ const MyContents = () => {
         .email("Invalid email address")
         .required("Email is required"),
     }),
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: (values, { resetForm }) => {
+      const newList = [...myList, values];
+      setMyList(newList);
+      localStorage.setItem("myList", JSON.stringify(newList));
+      resetForm();
     },
   });
-
-  const myList = useMemo(
-    () => JSON.parse(localStorage.getItem("myList")) || [],
-    []
-  );
 
   useEffect(() => {
     localStorage.setItem("myList", JSON.stringify(myList));
@@ -53,17 +58,6 @@ const MyContents = () => {
           />
           <TextField
             fullWidth
-            id="infoText"
-            name="infoText"
-            label="Info Text"
-            value={formik.values.infoText}
-            onChange={formik.handleChange}
-            error={formik.touched.infoText && Boolean(formik.errors.infoText)}
-            helperText={formik.touched.infoText && formik.errors.infoText}
-            style={styles.inputStyles}
-          />
-          <TextField
-            fullWidth
             id="email"
             name="email"
             label="Email"
@@ -73,6 +67,27 @@ const MyContents = () => {
             helperText={formik.touched.email && formik.errors.email}
             style={styles.inputStyles}
           />
+          <TextField
+            fullWidth
+            id="city"
+            name="city"
+            label="City"
+            value={formik.values.city}
+            onChange={formik.handleChange}
+            style={styles.inputStyles}
+          />
+          <TextField
+            fullWidth
+            id="infoText"
+            name="infoText"
+            label="Info Text"
+            value={formik.values.infoText}
+            onChange={formik.handleChange}
+            error={formik.touched.infoText && Boolean(formik.errors.infoText)}
+            helperText={formik.touched.infoText && formik.errors.infoText}
+            style={styles.inputStyles}
+          />
+          
           <Button
             type="submit"
             variant="contained"
@@ -87,7 +102,7 @@ const MyContents = () => {
         <Typography variant="h5" sx={styles.listTitle}>
           MyContents
         </Typography>
-        <MemoizedMyList exampleData={exampleData} />
+        <MemoizedMyList exampleData={myList} />
       </Box>
     </Box>
   );
