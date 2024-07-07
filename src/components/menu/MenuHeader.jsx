@@ -1,5 +1,5 @@
 import React from "react";
-import { AvatarContainer, Nav } from "./MenuStyle";
+import { AvatarContainer, Nav, Username } from "./MenuStyle";
 import { NavItem } from "./MenuStyle";
 import { StyledNavLink } from "./MenuStyle";
 import Avatar from '@mui/material/Avatar';
@@ -40,8 +40,8 @@ const MenuHeader = () => {
           <StyledNavLink to="/">Exit</StyledNavLink>
         </NavItem>
         <AvatarContainer>
-        <Avatar sx={{ width: '25px', height: '25px', }} src="/broken-image.jpg" />
-        {user && <span >{user.username}</span>}
+          <Avatar sx={{ width: '25px', height: '25px' }} src="/broken-image.jpg" />
+          {user && <Username>{user.username}</Username>}
         </AvatarContainer>
         </ul>
     </Nav>

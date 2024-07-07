@@ -40,4 +40,13 @@ export const StyledNavLink = styled(NavLink)`
   }
 `;
 
-export const AvatarContainer = styled.div` margin-left: auto;`;
+export const AvatarContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  font-size: 14px;
+`;
+
+export const Username = styled.span`
+  margin-left: 8px;
+`;
