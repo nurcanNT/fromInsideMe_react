@@ -4,6 +4,7 @@ export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 export const REGISTER = 'REGISTER';
 export const CREATE = 'CREATE';
+export const ADD_USER = 'ADD_USER';
 
 export const login = (user) => ({
   type: LOGIN,
@@ -22,4 +23,9 @@ export const register = (user) => ({
 export const create = (email) => ({
     type: CREATE,
     payload: email
-})
+});
+
+export const addUser = (user) => ({
+  type: ADD_USER,
+  payload: user,
+});
