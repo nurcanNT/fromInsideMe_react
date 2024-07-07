@@ -1,8 +1,18 @@
-import { LOGIN, LOGOUT, REGISTER } from '../actions';
+import { LOGIN, LOGOUT, REGISTER, ADD_USER } from '../actions';
 
 const initialState = {
   isAuthenticated: false,
-  user: null
+  user: null,
+  userList: [],
+};
+
+const userListReducer = (state = initialState.userList, action) => {
+  switch (action.type) {
+    case ADD_USER:
+      return [...state, action.payload];
+    default:
+      return state;
+  }
 };
 
 const authReducer = (state = initialState, action) => {
