@@ -44,7 +44,7 @@ const LoginForm = () => {
   });
 
   const handleLogin = () => {
-    const user = { username, password };
+    const user = { username, password, email };
     dispatch(login(user));
   };
 
@@ -183,7 +183,7 @@ const LoginForm = () => {
                 value={email}
                 error={emailValidationError !== ""}
                 helperText={emailValidationError}
-                onChange={handleEmailChange}
+                onChange={(e) => setEmail(e.target.value)}
               />
               <TextField
                 margin="normal"

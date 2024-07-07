@@ -3,23 +3,25 @@ import { Button, TextField, Typography, Box, Modal } from "@mui/material";
 import MenuHeader from "../menu/MenuHeader";
 import { styles } from "./ListStyle";
 import EmailInput from "../EmailInput";
+import { useDispatch, useSelector } from 'react-redux';
+import { create } from "../../actions";
 
 const ListPage = () => {
+  const [userList, setUserList] = useState(() => {
+    return JSON.parse(localStorage.getItem("userList")) || [];
+  });
   const [filteredUsers, setFilteredUsers] = useState([]);
   const inputRef = useRef();
+  const dispatch = useDispatch();
+  const userEmail = useSelector(state => state.auth.user?.email);
 
   const [formData, setFormData] = useState({
     rumuz: "",
-    email: "",
+    email: userEmail || "",
     city: "",
     infoText: "",
   });
   const [openModal, setOpenModal] = useState(false);
-
-  const userList = useMemo(
-    () => JSON.parse(localStorage.getItem("userList")) || [],
-    []
-  );
 
   useEffect(() => {
     localStorage.setItem("userList", JSON.stringify(userList));
@@ -30,11 +32,17 @@ const ListPage = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+  const handleCreate = () => {
+    if (userEmail) {
+      dispatch(create(userEmail));
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const newUserList = [...userList, formData];
-    localStorage.setItem("userList", JSON.stringify(newUserList));
-    setFormData({ rumuz: "", email: "", city: "", infoText: "" });
+    setUserList(newUserList);
+    setFormData({ rumuz: "", email: userEmail || "", city: "", infoText: "" });
     setOpenModal(false);
     setFilteredUsers(newUserList);
   };
@@ -50,6 +58,10 @@ const ListPage = () => {
     );
     setFilteredUsers(filteredUsers);
   };
+
+  useEffect(() => {
+    setFilteredUsers(userList);
+  }, [userList]);
 
   return (
     <Box>
@@ -97,7 +109,7 @@ const ListPage = () => {
             </Box>
             <Box sx={{ marginTop: "10px" }}>
               <label htmlFor="email">Email:</label>
-              <EmailInput //forwardRef
+              <EmailInput
                 value={formData.email}
                 onChange={handleInputChange}
                 inputRef={inputRef}
@@ -129,6 +141,7 @@ const ListPage = () => {
               type="submit"
               variant="contained"
               sx={{ marginTop: "10px" }}
+              onClick={handleCreate}
             >
               Create
             </Button>

@@ -33,7 +33,7 @@ const Register = () => {
   const dispatch = useDispatch();
 
   const handleRegister = () => {
-    const user = { username, password };
+    const user = { username, password, email };
     dispatch(register(user));
   };
 
@@ -161,7 +161,7 @@ const Register = () => {
             value={email}
             error={emailValidationError !== ""}
             helperText={emailValidationError}
-            onChange={handleEmailChange}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <FormControl fullWidth margin="normal">
             <InputLabel id="city-label">City</InputLabel>
