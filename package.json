@@ -27,7 +27,7 @@
     "web-vitals": "^2.1.4",
     "yup": "^1.4.0"
   },
-  "homepage": "https://github.com/nurcanNT/fromInsideMe.git",
+  "homepage": "http://localhost:3000/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
