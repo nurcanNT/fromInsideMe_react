@@ -5,6 +5,7 @@ export const LOGOUT = 'LOGOUT';
 export const REGISTER = 'REGISTER';
 export const CREATE = 'CREATE';
 export const ADD_USER = 'ADD_USER';
+export const TOGGLE_DARK_MODE = 'TOGGLE_DARK_MODE';
 
 export const login = (user) => ({
   type: LOGIN,
@@ -28,4 +29,8 @@ export const create = (email) => ({
 export const addUser = (user) => ({
   type: ADD_USER,
   payload: user,
+});
+
+export const toggleDarkMode = () => ({
+  type: TOGGLE_DARK_MODE,
 });

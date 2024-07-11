@@ -1,10 +1,13 @@
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import authReducer from './reducers/authReducer';
+import { thunk } from 'redux-thunk';
 import userListReducer from './reducers/authReducer'; 
+import themeReducer from './reducers/themeReducer';
 
 const rootReducer = combineReducers({
   auth: authReducer,
   userList: userListReducer, 
+  theme: themeReducer,
 });
 
 const saveToLocalStorage = (state) => {
@@ -32,6 +35,7 @@ const persistedState = loadFromLocalStorage();
 const store = createStore(
   rootReducer,
   persistedState,
+  applyMiddleware(thunk),
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
