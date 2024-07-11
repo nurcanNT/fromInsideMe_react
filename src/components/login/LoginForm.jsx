@@ -18,24 +18,20 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import SettingsBrightnessIcon from "@mui/icons-material/SettingsBrightness";
 import { Link, Link as RouterLink, useNavigate } from "react-router-dom";
-import { useDispatch } from 'react-redux';
-import { login } from '../../actions'
+import { useDispatch, useSelector } from 'react-redux';
+import { login, toggleDarkMode } from '../../actions'
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [darkMode, setDarkMode] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [usernameValidationError, setUsernameValidationError] = useState("");
   const [passwordValidationError, setPasswordValidationError] = useState("");
   const [emailValidationError, setEmailValidationError] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const toggleDarkMode = () => {
-    setDarkMode((prevDarkMode) => !prevDarkMode);
-  };
+  const darkMode = useSelector((state) => state.theme.darkMode);
 
   const theme = createTheme({
     palette: {
@@ -252,7 +248,7 @@ const LoginForm = () => {
           </Box>
         </Grid>
         <Box sx={{ position: "absolute", top: "20px" }}>
-          <Button onClick={toggleDarkMode}>
+          <Button onClick={() => dispatch(toggleDarkMode())}>
             <SettingsBrightnessIcon sx={{ mr: 0.5 }} />{" "}
             {darkMode ? "Light Mode" : "Dark Mode"}
           </Button>
