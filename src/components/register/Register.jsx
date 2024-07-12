@@ -290,7 +290,7 @@ const Register = () => {
             </Button>
             <Typography variant="body2" color={theme.palette.text.secondary}>
               Already have an account?{" "}
-              <Link component={RouterLink} to="/" underline="hover" style={{ color: theme.palette.text.primary }}>
+              <Link component={RouterLink} to="/"  style={{ color: theme.palette.text.primary }}>
                 Log in
               </Link>
             </Typography>

@@ -36,6 +36,9 @@ const LoginForm = () => {
   const theme = createTheme({
     palette: {
       mode: darkMode ? "dark" : "light",
+      text: {
+        primary: darkMode ? "#fff" : "#000",
+      },
     },
   });
 
@@ -141,6 +144,12 @@ const LoginForm = () => {
               alignItems: "center",
             }}
           >
+            <Box sx={{ position: "absolute", top: "20px" }}>
+          <Button onClick={() => dispatch(toggleDarkMode())}>
+            <SettingsBrightnessIcon sx={{ mr: 0.5 }} />{" "}
+            {darkMode ? "Dark Mode" : "Light Mode"}
+          </Button>
+        </Box>
             <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
               <LockOutlinedIcon />
             </Avatar>
@@ -235,11 +244,14 @@ const LoginForm = () => {
                 Don't have an account yet?
               </Typography>
 
-              <Box sx={{ ml: 2 }}>
+              <Box sx={{ ml: 2}}>
                 <Link
                   component={RouterLink}
                   to="/register/Register"
                   underline="none"
+                  sx={{
+                    color: theme.palette.text.primary,
+                  }}
                 >
                   Register
                 </Link>
@@ -247,12 +259,6 @@ const LoginForm = () => {
             </Box>
           </Box>
         </Grid>
-        <Box sx={{ position: "absolute", top: "20px" }}>
-          <Button onClick={() => dispatch(toggleDarkMode())}>
-            <SettingsBrightnessIcon sx={{ mr: 0.5 }} />{" "}
-            {darkMode ? "Dark Mode" : "Light Mode"}
-          </Button>
-        </Box>
       </Grid>
     </ThemeProvider>
   );
