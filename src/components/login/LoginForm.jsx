@@ -250,7 +250,7 @@ const LoginForm = () => {
         <Box sx={{ position: "absolute", top: "20px" }}>
           <Button onClick={() => dispatch(toggleDarkMode())}>
             <SettingsBrightnessIcon sx={{ mr: 0.5 }} />{" "}
-            {darkMode ? "Light Mode" : "Dark Mode"}
+            {darkMode ? "Dark Mode" : "Light Mode"}
           </Button>
         </Box>
       </Grid>
