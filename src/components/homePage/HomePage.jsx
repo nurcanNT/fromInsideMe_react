@@ -2,10 +2,14 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import MenuHeader from "../menu/MenuHeader";
 import { styles } from "./HomePageStyle";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, createTheme, ThemeProvider, Button, CssBaseline } from "@mui/material";
 import "./HomePageStyle.js";
 import { faSun, faCloudRain, faCloud } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import SettingsBrightnessIcon from "@mui/icons-material/SettingsBrightness";
+import { toggleDarkMode } from "../../actions.js";
+import { useSelector, useDispatch } from 'react-redux';
+
 const HomePage = () => {
   const [weatherData, setWeatherData] = useState({
     temperature: "",
@@ -13,6 +17,20 @@ const HomePage = () => {
     cityName: "",
     month: "",
     day: "",
+  });
+  const dispatch = useDispatch();
+  const darkMode = useSelector((state) => state.theme.darkMode);
+
+  const theme = createTheme({
+    palette: {
+      mode: darkMode ? "dark" : "light",
+      background: {
+        default: darkMode ? "#121212" : "#fff"
+      },
+      text: {
+        primary: darkMode ? "#fff" : "#000"
+      },
+    },
   });
 
   const getIcon = (condition) => {
@@ -79,7 +97,15 @@ const HomePage = () => {
   } = styles;
 
   return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
     <Box>
+      <Box sx={{ position: "absolute", top: "50px" }}>
+          <Button onClick={() => dispatch(toggleDarkMode())}>
+            <SettingsBrightnessIcon sx={{ mr: 0.5 }} />{" "}
+            {darkMode ? "Dark Mode" : "Light Mode"}
+          </Button>
+        </Box>
       <MenuHeader />
       <Box sx={havaDurumu}>
         <Box sx={havaIcon}>{getIcon(weatherData.condition)}</Box>
@@ -94,6 +120,7 @@ const HomePage = () => {
         </Box>
       </Box>
     </Box>
+    </ThemeProvider>
   );
 };
 
