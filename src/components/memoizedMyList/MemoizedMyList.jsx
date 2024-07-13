@@ -1,8 +1,26 @@
-import { Button } from "@mui/material";
+import { Button, ThemeProvider, CssBaseline, createTheme, Box } from "@mui/material";
 import React, { memo, useEffect, useState } from "react";
 import { styles } from "./MemoizedMyStyles";
+import { useSelector, useDispatch } from 'react-redux';
+import SettingsBrightnessIcon from "@mui/icons-material/SettingsBrightness";
+import { toggleDarkMode } from "../../actions";
 
 const MemoizedMyList = memo(({ exampleData }) => {
+
+  const dispatch = useDispatch();
+  const darkMode = useSelector((state) => state.theme.darkMode);
+
+  const theme = createTheme({
+    palette: {
+      mode: darkMode ? "dark" : "light",
+      background: {
+        default: darkMode ? "#121212" : "#fff"
+      },
+      text: {
+        primary: darkMode ? "#fff" : "#000"
+      },
+    },
+  });
 
   const [myList, setMyList] = useState(() => {
     const storedList = JSON.parse(localStorage.getItem("myList"));
@@ -20,6 +38,14 @@ const MemoizedMyList = memo(({ exampleData }) => {
   };
 
   return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Box sx={{ position: "absolute", top: "50px" }}>
+          <Button onClick={() => dispatch(toggleDarkMode())}>
+            <SettingsBrightnessIcon sx={{ mr: 0.5 }} />{" "}
+            {darkMode ? "Dark Mode" : "Light Mode"}
+          </Button>
+        </Box>
     <table style={{ width: "100%", borderCollapse: "collapse" }}>
       <thead>
         <tr style={{ borderBottom: "1px solid #f0f0f0" }}>
@@ -46,6 +72,7 @@ const MemoizedMyList = memo(({ exampleData }) => {
         ))}
       </tbody>
     </table>
+    </ThemeProvider>
   );
 });
 
