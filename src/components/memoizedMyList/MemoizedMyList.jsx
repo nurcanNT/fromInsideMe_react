@@ -1,4 +1,4 @@
-import { Button, ThemeProvider, CssBaseline, createTheme, Box } from "@mui/material";
+import { Button, ThemeProvider, CssBaseline, createTheme, Box, TextField, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import React, { memo, useEffect, useState } from "react";
 import { styles } from "./MemoizedMyStyles";
 import { useSelector, useDispatch } from 'react-redux';
@@ -14,10 +14,33 @@ const MemoizedMyList = memo(({ exampleData }) => {
     palette: {
       mode: darkMode ? "dark" : "light",
       background: {
-        default: darkMode ? "#121212" : "#fff"
+        default: darkMode ? "#121212" : "#fff",
+        paper: darkMode ? "#333" : "#fff",
       },
       text: {
         primary: darkMode ? "#fff" : "#000"
+      },
+    },
+    components: {
+      MuiOutlinedInput: {
+        styleOverrides: {
+          root: {
+            backgroundColor: darkMode ? "#333" : "#fff",
+            "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+              borderColor: darkMode ? "#fff" : "#000",
+            },
+          },
+          input: {
+            color: darkMode ? "#fff" : "#000",
+          },
+        },
+      },
+      MuiInputLabel: {
+        styleOverrides: {
+          root: {
+            color: darkMode ? "#fff" : "#000",
+          },
+        },
       },
     },
   });
@@ -41,37 +64,50 @@ const MemoizedMyList = memo(({ exampleData }) => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Box sx={{ position: "absolute", top: "50px" }}>
-          <Button onClick={() => dispatch(toggleDarkMode())}>
-            <SettingsBrightnessIcon sx={{ mr: 0.5 }} />{" "}
-            {darkMode ? "Dark Mode" : "Light Mode"}
-          </Button>
-        </Box>
-    <table style={{ width: "100%", borderCollapse: "collapse" }}>
-      <thead>
-        <tr style={{ borderBottom: "1px solid #f0f0f0" }}>
-          <th style={styles.columnHeader}>Rumuz</th>
-          <th style={styles.columnHeader}>Email</th>
-          <th style={styles.columnHeader}>City</th>
-          <th style={styles.columnHeader}>Info Text</th>
-          <th style={styles.columnHeader}>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        {myList.map((user, index) => (
-          <tr key={index} style={{ borderBottom: "1px solid #f0f0f0" }}>
-            <td style={styles.cell}>{user.rumuz}</td>
-            <td style={styles.cell}>{user.email}</td>
-            <td style={styles.cell}>{user.city}</td>
-            <td style={styles.cell}>{user.infoText}</td>
-            <td style={styles.cell}>
-              <Button variant="contained" onClick={() => handleDelete(index)}>
-                Delete
-              </Button>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+        <Button onClick={() => dispatch(toggleDarkMode())}>
+          <SettingsBrightnessIcon sx={{ mr: 0.5 }} />{" "}
+          {darkMode ? "Light Mode" : "Dark Mode"}
+        </Button>
+      </Box>
+      <Box
+        sx={{
+          backgroundColor: darkMode ? "background.default" : "background.paper",
+          color: darkMode ? "text.primary" : "text.primary",
+          padding: 2,
+          borderRadius: 1,
+          boxShadow: 3,
+          mt: 3,
+        }}
+      >
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell style={styles.columnHeader}>Rumuz</TableCell>
+                <TableCell style={styles.columnHeader}>Email</TableCell>
+                <TableCell style={styles.columnHeader}>City</TableCell>
+                <TableCell style={styles.columnHeader}>Info Text</TableCell>
+                <TableCell style={styles.columnHeader}>Action</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {myList.map((user, index) => (
+                <TableRow key={index}>
+                  <TableCell style={styles.cell}>{user.rumuz}</TableCell>
+                  <TableCell style={styles.cell}>{user.email}</TableCell>
+                  <TableCell style={styles.cell}>{user.city}</TableCell>
+                  <TableCell style={styles.cell}>{user.infoText}</TableCell>
+                  <TableCell style={styles.cell}>
+                    <Button variant="contained" onClick={() => handleDelete(index)}>
+                      Delete
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Box>
     </ThemeProvider>
   );
 });
