@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Button, TextField, Typography, Box, Modal } from "@mui/material";
+import { Button, TextField, Typography, Box, Modal, createTheme, ThemeProvider, CssBaseline  } from "@mui/material";
 import MenuHeader from "../menu/MenuHeader";
 import { styles } from "./ListStyle";
 import EmailInput from "../EmailInput";
 import { useDispatch, useSelector } from 'react-redux';
 import { create,addUser } from "../../actions";
+import SettingsBrightnessIcon from "@mui/icons-material/SettingsBrightness";
+import { toggleDarkMode } from "../../actions.js";
 
 const ListPage = () => {
   const [userList, setUserList] = useState(() => {
@@ -14,6 +16,41 @@ const ListPage = () => {
   const inputRef = useRef();
   const dispatch = useDispatch();
   const userEmail = useSelector(state => state.auth.user?.email);
+  const darkMode = useSelector((state) => state.theme.darkMode);
+  const theme = createTheme({
+    palette: {
+      mode: darkMode ? "dark" : "light",
+      background: {
+        default: darkMode ? "#121212" : "#fff",
+        paper: darkMode ? "#333" : "#fff",
+      },
+      text: {
+        primary: darkMode ? "#fff" : "#000"
+      },
+    },
+    components: {
+      MuiOutlinedInput: {
+        styleOverrides: {
+          root: {
+            backgroundColor: darkMode ? "#333" : "#fff",
+            "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+              borderColor: darkMode ? "#fff" : "#000",
+            },
+          },
+          input: {
+            color: darkMode ? "#fff" : "#000",
+          },
+        },
+      },
+      MuiInputLabel: {
+        styleOverrides: {
+          root: {
+            color: darkMode ? "#fff" : "#000",
+          },
+        },
+      },
+    },
+  });
 
   const [formData, setFormData] = useState({
     rumuz: "",
@@ -64,7 +101,21 @@ const ListPage = () => {
   }, [userList]);
 
   return (
-    <Box>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Box sx={{ position: "absolute", top: "50px" }}>
+        <Button onClick={() => dispatch(toggleDarkMode())}>
+          <SettingsBrightnessIcon sx={{ mr: 0.5 }} />{" "}
+          {darkMode ? "Light Mode" : "Dark Mode"}
+        </Button>
+      </Box>
+    <Box sx={{
+          backgroundColor: darkMode ? "background.default" : "background.paper",
+          color: darkMode ? "text.primary" : "text.primary",
+          padding: 1,
+          borderRadius: 1,
+          boxShadow: 3,
+        }}>
       <MenuHeader />
       <Box sx={{ marginLeft: "80%", marginTop: "1rem" }}>
         <Button variant="contained" onClick={() => setOpenModal(true)}>
@@ -182,6 +233,7 @@ const ListPage = () => {
         </tbody>
       </table>
     </Box>
+    </ThemeProvider>
   );
 };
 
