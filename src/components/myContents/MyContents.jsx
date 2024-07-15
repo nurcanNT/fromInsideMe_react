@@ -60,12 +60,25 @@ const MyContents = () => {
     },
     buttonStyles: {
       marginTop: "10px",
+      color: darkMode ? "#fff" : "#000",
     },
     listContainer: {
       margin: "20px",
     },
     listTitle: {
       marginBottom: "10px",
+      color: darkMode ? "#fff" : "#000",
+    },
+    textFieldRoot: {
+      "& .MuiInputBase-root": {
+        color: darkMode ? "#fff" : "#000", 
+      },
+      "& .MuiInputLabel-root": {
+        color: darkMode ? "#fff" : "#000", 
+      },
+      "& .MuiFormHelperText-root": {
+        color: darkMode ? "#fff" : "#000", 
+      },
     },
   };
 
@@ -84,6 +97,7 @@ const MyContents = () => {
             error={formik.touched.rumuz && Boolean(formik.errors.rumuz)}
             helperText={formik.touched.rumuz && formik.errors.rumuz}
             style={styles.inputStyles}
+            sx={styles.textFieldRoot}
           />
           <TextField
             fullWidth
@@ -95,6 +109,7 @@ const MyContents = () => {
             error={formik.touched.email && Boolean(formik.errors.email)}
             helperText={formik.touched.email && formik.errors.email}
             style={styles.inputStyles}
+            sx={styles.textFieldRoot}
           />
           <TextField
             fullWidth
@@ -104,6 +119,7 @@ const MyContents = () => {
             value={formik.values.city}
             onChange={formik.handleChange}
             style={styles.inputStyles}
+            sx={styles.textFieldRoot}
           />
           <TextField
             fullWidth
@@ -115,6 +131,7 @@ const MyContents = () => {
             error={formik.touched.infoText && Boolean(formik.errors.infoText)}
             helperText={formik.touched.infoText && formik.errors.infoText}
             style={styles.inputStyles}
+            sx={styles.textFieldRoot}
           />
           
           <Button
