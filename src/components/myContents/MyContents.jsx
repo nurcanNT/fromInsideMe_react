@@ -1,14 +1,14 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import MenuHeader from "../menu/MenuHeader";
 import { Box, TextField, Button, Typography } from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { styles } from "./MyContentsStyle";
 import MemoizedMyList from "../memoizedMyList/MemoizedMyList";
 import { useSelector } from "react-redux";
 
 const MyContents = () => {
   const userEmail = useSelector(state => state.auth.user?.email);
+  const darkMode = useSelector(state => state.theme.darkMode);
 
   const [myList, setMyList] = useState(() => {
     return JSON.parse(localStorage.getItem("myList")) || [];
@@ -39,6 +39,35 @@ const MyContents = () => {
   useEffect(() => {
     localStorage.setItem("myList", JSON.stringify(myList));
   }, [myList]);
+
+  const styles = {
+    formContainer: {
+      backgroundColor: darkMode ? "#333" : "#fff",
+      padding: "20px",
+      width: "400px",
+      borderRadius: "8px",
+      boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+      margin: "20px",
+      marginLeft: "500px", 
+    },
+    formStyles: {
+      display: "flex",
+      flexDirection: "column",
+      gap: "10px",
+    },
+    inputStyles: {
+      marginBottom: "10px",
+    },
+    buttonStyles: {
+      marginTop: "10px",
+    },
+    listContainer: {
+      margin: "20px",
+    },
+    listTitle: {
+      marginBottom: "10px",
+    },
+  };
 
   return (
     <Box>
