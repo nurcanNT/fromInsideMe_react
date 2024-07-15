@@ -108,7 +108,6 @@ const HomePage = () => {
         </Box>
       <MenuHeader />
       <Box sx={havaDurumu}>
-        <Box sx={havaIcon}>{getIcon(weatherData.condition)}</Box>
         <Box sx={havaBilgi}>
           <Typography sx={havaDerece}>{weatherData.temperature}</Typography>
           <Typography sx={havaDurum}>{weatherData.condition}</Typography>
