@@ -99,7 +99,7 @@ const HomePage = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-    <Box>
+    <Box sx={{padding: 1}}>
       <Box sx={{ position: "absolute", top: "50px" }}>
           <Button onClick={() => dispatch(toggleDarkMode())}>
             <SettingsBrightnessIcon sx={{ mr: 0.5 }} />{" "}

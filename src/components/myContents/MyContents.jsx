@@ -83,7 +83,7 @@ const MyContents = () => {
   };
 
   return (
-    <Box>
+    <Box sx={{padding: 1}}>
       <MenuHeader />
       <Box sx={styles.formContainer}>
         <form onSubmit={formik.handleSubmit} style={styles.formStyles}>
