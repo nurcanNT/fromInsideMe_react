@@ -222,9 +222,13 @@ const ListPage = () => {
             marginTop: "20px",
             width: "400px",
             height: "35px",
+            borderRadius: "8px", 
+            padding: "5px 10px",
+            border: "1px solid #ccc", 
           }}
           onChange={handleSearch}
         />
+
         <Typography variant="h2">User List</Typography>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead>
