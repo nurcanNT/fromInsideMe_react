@@ -16,13 +16,23 @@ function HomeIcon(props) {
 
 const MenuHeader = () => {
   const user = useSelector(state => state.auth.user);
+  const darkMode = useSelector((state) => state.theme.darkMode);
+
+  const navStyles = {
+    backgroundColor: darkMode ? "#333" : "#fff",
+    color: darkMode ? "#fff" : "#000",
+  };
+
+  const usernameStyles = {
+    color: "#000", 
+  };
 
   return (
-    <Nav>
-     <ul>
+    <Nav style={navStyles}>
+      <ul>
         <NavItem>
           <StyledNavLink exact to="/homePage/HomePage">
-          <HomeIcon style={{ marginBottom: '-5px' }} />
+            <HomeIcon style={{ marginBottom: '-5px' }} />
             Home Page
           </StyledNavLink>
         </NavItem>
@@ -40,12 +50,19 @@ const MenuHeader = () => {
           <StyledNavLink to="/">Exit</StyledNavLink>
         </NavItem>
         <AvatarContainer>
-          <Avatar sx={{ width: '25px', height: '25px' }} src="/broken-image.jpg" />
-          {user && <Username>{user.username}</Username>}
+          <Avatar
+            sx={{
+              width: '25px',
+              height: '25px',
+              backgroundColor: "#fff",
+              color: "#000",
+            }}
+            src="/broken-image.jpg"
+          />
+          {user && <Username style={usernameStyles}>{user.username}</Username>}
         </AvatarContainer>
-        </ul>
+      </ul>
     </Nav>
-    
   );
 };
 
