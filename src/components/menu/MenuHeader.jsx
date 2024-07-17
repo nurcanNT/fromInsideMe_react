@@ -81,7 +81,7 @@ const MenuHeader = () => {
             aria-expanded={open ? 'true' : undefined}
           >
             <Avatar sx={{ width: 24, height: 24, fontSize:"14px", backgroundColor: "#C0C0C0",
-              color: "#000", }}>
+              color: "#000" }}>
               {user ? getInitial(user.username) : "X"}
             </Avatar>
           </IconButton>
