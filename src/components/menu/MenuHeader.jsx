@@ -4,9 +4,11 @@ import { NavItem } from "./MenuStyle";
 import { StyledNavLink } from "./MenuStyle";
 import Avatar from '@mui/material/Avatar';
 import SvgIcon from '@mui/material/SvgIcon';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Divider, IconButton, ListItemIcon, Menu, MenuItem, Tooltip } from "@mui/material";
 import { Logout, PersonAdd, Settings } from "@mui/icons-material";
+import { useNavigate } from 'react-router-dom';
+import { logout } from "../../actions";
 
 function HomeIcon(props) {
   return (
@@ -19,6 +21,8 @@ function HomeIcon(props) {
 const MenuHeader = () => {
   const user = useSelector(state => state.auth.user);
   const darkMode = useSelector((state) => state.theme.darkMode);
+  const dispatch = useDispatch();
+  const navigate = useNavigate(); 
 
   const navStyles = {
     backgroundColor: darkMode ? "#333" : "#fff",
@@ -38,6 +42,11 @@ const MenuHeader = () => {
     setAnchorEl(null);
   };
 
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/");
+  };
+
   const getInitial = (username) => {
     return username ? username.charAt(0).toUpperCase() : "M";
   };
@@ -47,7 +56,7 @@ const MenuHeader = () => {
       <ul>
         <NavItem>
           <StyledNavLink exact to="/homePage/HomePage">
-            <HomeIcon style={{ marginBottom: '-5px' }} />
+            <HomeIcon style={{ marginBottom: '1px' }} />
             Home Page
           </StyledNavLink>
         </NavItem>
@@ -60,9 +69,6 @@ const MenuHeader = () => {
           <StyledNavLink exact to="/list/ListPage">
             List Page
           </StyledNavLink>
-        </NavItem>
-        <NavItem>
-          <StyledNavLink to="/">Exit</StyledNavLink>
         </NavItem>
         <AvatarContainer>
         <Tooltip title="Account settings">
@@ -94,6 +100,8 @@ const MenuHeader = () => {
             overflow: 'visible',
             filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
             mt: 1.5,
+            backgroundColor: "#fff",
+            color: "#000",
             '& .MuiAvatar-root': {
               width: 32,
               height: 32,
@@ -111,6 +119,7 @@ const MenuHeader = () => {
               bgcolor: 'background.paper',
               transform: 'translateY(-50%) rotate(45deg)',
               zIndex: 0,
+              backgroundColor: "#fff",
             },
           },
         }}
@@ -118,27 +127,29 @@ const MenuHeader = () => {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
         <MenuItem onClick={handleClose}>
-          <Avatar /> Profile
+          <Avatar sx= {{backgroundColor: "#C0C0C0",
+              color: "#fff",}} /> Profile
         </MenuItem>
         <MenuItem onClick={handleClose}>
-          <Avatar /> My account
+          <Avatar sx={{ backgroundColor: "#C0C0C0",
+              color: "#fff",}} /> My account
         </MenuItem>
         <Divider />
         <MenuItem onClick={handleClose}>
           <ListItemIcon>
-            <PersonAdd fontSize="small" />
+            <PersonAdd fontSize="small" sx= {{ color: "#808080"}} />
           </ListItemIcon>
           Add another account
         </MenuItem>
         <MenuItem onClick={handleClose}>
           <ListItemIcon>
-            <Settings fontSize="small" />
+            <Settings fontSize="small" sx= {{ color: "#808080"}} />
           </ListItemIcon>
           Settings
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handleLogout}>
           <ListItemIcon>
-            <Logout fontSize="small" />
+            <Logout fontSize="small" sx= {{ color: "#808080"}} />
           </ListItemIcon>
           Logout
         </MenuItem>
