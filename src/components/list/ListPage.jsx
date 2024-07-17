@@ -117,10 +117,10 @@ const ListPage = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Box sx={{ position: "absolute", top: "60px" }}>
+      <Box sx={{ position: "absolute", top: "80px", left: "9px" }}>
         <Button onClick={() => dispatch(toggleDarkMode())}>
           <SettingsBrightnessIcon sx={{ mr: 0.5 }} />{" "}
-          {darkMode ? "Light Mode" : "Dark Mode"}
+          {darkMode ? "Dark Mode" : "Light Mode"}
         </Button>
       </Box>
       <Box sx={{
