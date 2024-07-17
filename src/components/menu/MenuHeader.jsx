@@ -30,7 +30,8 @@ const MenuHeader = () => {
   };
 
   const usernameStyles = {
-    color: "#000", 
+    color: "#000",
+    cursor: "pointer" 
   };
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -85,8 +86,8 @@ const MenuHeader = () => {
               {user ? getInitial(user.username) : "X"}
             </Avatar>
           </IconButton>
-        </Tooltip>
-          {user && <Username style={usernameStyles}>{user.username}</Username>}
+        </Tooltip> 
+          {user && <Username onClick={handleClick} style={usernameStyles}>{user.username}</Username>}
         </AvatarContainer>
         <Menu
         anchorEl={anchorEl}
