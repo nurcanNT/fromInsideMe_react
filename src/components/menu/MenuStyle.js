@@ -25,6 +25,9 @@ export const StyledNavLink = styled(NavLink)`
   padding: 8px 16px;
   border-radius: 4px;
   transition: background-color 0.3s, color 0.3s;
+  display: flex;
+  align-items: center;
+  margin-left: auto;
 
   &:hover {
     background-color: #ddd;
