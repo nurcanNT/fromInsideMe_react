@@ -47,7 +47,7 @@ const MyContents = () => {
       width: "400px",
       borderRadius: "8px",
       boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
-      margin: "20px",
+      margin: "50px",
       marginLeft: "500px", 
     },
     formStyles: {
