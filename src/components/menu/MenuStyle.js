@@ -47,9 +47,9 @@ export const AvatarContainer = styled.div`
   display: flex;
   align-items: center;
   margin-left: auto;
-  font-size: 14px;
+  font-size: 18px;
 `;
 
 export const Username = styled.span`
-  margin-left: 8px;
+  margin-left: 3px;
 `;
