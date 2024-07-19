@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Divider, IconButton, ListItemIcon, Menu, MenuItem, Tooltip } from "@mui/material";
 import { Logout, PersonAdd, Settings } from "@mui/icons-material";
 import { useNavigate } from 'react-router-dom';
-import { logout } from "../../actions";
+import { logout, updateProfile } from "../../actions";
 
 function HomeIcon(props) {
   return (
@@ -48,10 +48,15 @@ const MenuHeader = () => {
     navigate("/");
   };
 
+  const handleProfile = () => {
+    dispatch(updateProfile());
+    navigate("/profile/AccountProfile");
+  };
+
   const getInitial = (username) => {
     return username ? username.charAt(0).toUpperCase() : "M";
   };
-
+  console.log(user ? user.username : "No user");
   return (
     <Nav style={navStyles}>
       <ul>
@@ -127,7 +132,7 @@ const MenuHeader = () => {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handleProfile}>
           <Avatar sx= {{backgroundColor: "#C0C0C0",
               color: "#fff",}} /> Profile
         </MenuItem>
