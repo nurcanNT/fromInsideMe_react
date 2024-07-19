@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Box, Button, Container, TextField, MenuItem, Typography, CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 import { styled } from '@mui/system';
 import MenuHeader from '../menu/MenuHeader'; 
+import SideBar from '../SideBar';
 import { updateProfile, toggleDarkMode } from '../../actions'; 
 import SettingsBrightnessIcon from "@mui/icons-material/SettingsBrightness";
 
@@ -64,64 +65,67 @@ const AccountProfile = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Box sx={{padding: 1}}>
-        <Box sx={{ position: "absolute", top: "80px" }}>
+      <MenuHeader />
+      <Box sx={{ display: 'flex' }}>
+        <SideBar />
+        <Box sx={{ flexGrow: 1, padding: 3, marginLeft: '240px', marginTop: '64px' }}>
+          <Box sx={{ position: "absolute", top: "80px" }}>
             <Button onClick={() => dispatch(toggleDarkMode())}>
               <SettingsBrightnessIcon sx={{ mr: 0.5 }} />{" "}
               {darkMode ? "Dark Mode" : "Light Mode"}
             </Button>
           </Box>
-        <MenuHeader />
-        <ProfileContainer>
-          <Typography variant="h4">Hesap</Typography>
-          <ProfileForm>
-            <TextField
-              label="Tam adı"
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
-              margin="normal"
-              fullWidth
-            />
-            <TextField
-              label="Email Adresi"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              margin="normal"
-              fullWidth
-            />
-            <TextField
-              select
-              label="Timezone"
-              value={timezone}
-              onChange={(e) => setTimezone(e.target.value)}
-              margin="normal"
-              fullWidth
-            >
-              {timezones.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </TextField>
-            <TextField
-              select
-              label="Dil"
-              value={language}
-              onChange={(e) => setLanguage(e.target.value)}
-              margin="normal"
-              fullWidth
-            >
-              {languages.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </TextField>
-            <Button variant="contained" color="primary" onClick={handleSave} style={{ marginTop: 16 }}>
-              Kaydet
-            </Button>
-          </ProfileForm>
-        </ProfileContainer>
+          <ProfileContainer>
+            <Typography variant="h4">Hesap</Typography>
+            <ProfileForm>
+              <TextField
+                label="Tam adı"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                margin="normal"
+                fullWidth
+              />
+              <TextField
+                label="Email Adresi"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                margin="normal"
+                fullWidth
+              />
+              <TextField
+                select
+                label="Timezone"
+                value={timezone}
+                onChange={(e) => setTimezone(e.target.value)}
+                margin="normal"
+                fullWidth
+              >
+                {timezones.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
+              <TextField
+                select
+                label="Dil"
+                value={language}
+                onChange={(e) => setLanguage(e.target.value)}
+                margin="normal"
+                fullWidth
+              >
+                {languages.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
+              <Button variant="contained" color="primary" onClick={handleSave} style={{ marginTop: 16 }}>
+                Kaydet
+              </Button>
+            </ProfileForm>
+          </ProfileContainer>
+        </Box>
       </Box>
     </ThemeProvider>
   );
