@@ -1,11 +1,10 @@
-import { type } from "@testing-library/user-event/dist/type";
-
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 export const REGISTER = 'REGISTER';
 export const CREATE = 'CREATE';
 export const ADD_USER = 'ADD_USER';
 export const TOGGLE_DARK_MODE = 'TOGGLE_DARK_MODE';
+export const UPDATE_PROFILE = 'UPDATE_PROFILE';
 
 export const login = (user) => ({
   type: LOGIN,
@@ -33,4 +32,9 @@ export const addUser = (user) => ({
 
 export const toggleDarkMode = () => ({
   type: TOGGLE_DARK_MODE,
+});
+
+export const updateProfile = (profile) => ({
+  type: UPDATE_PROFILE,
+  payload: profile,
 });

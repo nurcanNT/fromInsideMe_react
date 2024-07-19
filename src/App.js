@@ -1,27 +1,40 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
-import { useSelector } from 'react-redux';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import HomePage from './components/homePage/HomePage';
+import MyContents from './components/myContents/MyContents';
+import ListPage from './components/list/ListPage';
 import "./App.css";
+
 import LoginForm from "./components/login/LoginForm";
 import Register from "./components/register/Register";
-import HomePage from "./components/homePage/HomePage";
-import ListPage from "./components/list/ListPage";
-import MyContents from "./components/myContents/MyContents";
+import AccountProfile from './components/profile/AccountProfile'; 
+import { useSelector } from 'react-redux';
 
-function App() {
+const theme = createTheme({
+  palette: {
+    background: {
+      paper: '#fff',
+    },
+  },
+});
+
+const App = () => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<LoginForm />} />
-        <Route path="/register/Register" element={<Register />} />
-        <Route path="/homePage/HomePage" element={<HomePage />} />
-        <Route path="/list/ListPage" element={<ListPage />} />
-        <Route path="/myContents/MyContents" element={<MyContents />} />
-      </Routes>
-    </Router>
+    <ThemeProvider theme={theme}>
+      <Router>
+          <Routes>
+          <Route path="/" element={<LoginForm />} />
+          <Route path="/register/Register" element={<Register />} />
+            <Route path="/homePage/HomePage" element={<HomePage />} />
+            <Route path="/myContents/MyContents" element={<MyContents />} />
+            <Route path="/list/ListPage" element={<ListPage />} />
+            <Route path="/profile/AccountProfile" element={<AccountProfile />} />
+          </Routes>
+      </Router>
+    </ThemeProvider>
   );
-}
+};
 
 export default App;

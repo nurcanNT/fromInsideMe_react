@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT, REGISTER, ADD_USER } from '../actions';
+import { LOGIN, LOGOUT, REGISTER, ADD_USER, UPDATE_PROFILE } from '../actions';
 
 const initialState = {
   isAuthenticated: false,
@@ -34,6 +34,14 @@ const authReducer = (state = initialState, action) => {
         ...state,
         isAuthenticated: true,
         user: action.payload
+      };
+    case UPDATE_PROFILE:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          ...action.payload,
+        },
       };
     default:
       return state;
