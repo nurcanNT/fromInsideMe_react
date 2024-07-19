@@ -56,7 +56,7 @@ const MenuHeader = () => {
   const getInitial = (username) => {
     return username ? username.charAt(0).toUpperCase() : "M";
   };
-  console.log(user ? user.username : "No user");
+  
   return (
     <Nav style={navStyles}>
       <ul>
