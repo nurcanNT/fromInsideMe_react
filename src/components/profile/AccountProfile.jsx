@@ -76,10 +76,10 @@ const AccountProfile = () => {
             </Button>
           </Box>
           <ProfileContainer>
-            <Typography variant="h4">Hesap</Typography>
+            <Typography variant="h4">Account</Typography>
             <ProfileForm>
               <TextField
-                label="Tam adı"
+                label="Username"
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
                 margin="normal"
@@ -108,7 +108,7 @@ const AccountProfile = () => {
               </TextField>
               <TextField
                 select
-                label="Dil"
+                label="Language"
                 value={language}
                 onChange={(e) => setLanguage(e.target.value)}
                 margin="normal"
@@ -121,7 +121,7 @@ const AccountProfile = () => {
                 ))}
               </TextField>
               <Button variant="contained" color="primary" onClick={handleSave} style={{ marginTop: 16 }}>
-                Kaydet
+                Submit
               </Button>
             </ProfileForm>
           </ProfileContainer>
