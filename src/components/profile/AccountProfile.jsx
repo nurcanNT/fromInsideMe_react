@@ -65,6 +65,13 @@ const AccountProfile = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      <Box sx={{
+          backgroundColor: darkMode ? "background.default" : "background.paper",
+          color: darkMode ? "text.primary" : "text.primary",
+          padding: 1,
+          borderRadius: 1,
+          boxShadow: 3,
+        }}>
       <MenuHeader />
       <Box sx={{ display: 'flex' }}>
         <SideBar />
@@ -75,7 +82,7 @@ const AccountProfile = () => {
               {darkMode ? "Dark Mode" : "Light Mode"}
             </Button>
           </Box>
-          <ProfileContainer>
+          <ProfileContainer >
             <Typography variant="h4">Account</Typography>
             <ProfileForm>
               <TextField
@@ -126,6 +133,7 @@ const AccountProfile = () => {
             </ProfileForm>
           </ProfileContainer>
         </Box>
+      </Box>
       </Box>
     </ThemeProvider>
   );
