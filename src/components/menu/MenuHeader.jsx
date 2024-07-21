@@ -106,8 +106,8 @@ const MenuHeader = () => {
             overflow: 'visible',
             filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
             mt: 1.5,
-            backgroundColor: "#fff",
-            color: "#000",
+            backgroundColor: darkMode ? "#424242" : "#fff",
+            color: darkMode ? "#fff" : "#000",
             '& .MuiAvatar-root': {
               width: 32,
               height: 32,
@@ -125,7 +125,7 @@ const MenuHeader = () => {
               bgcolor: 'background.paper',
               transform: 'translateY(-50%) rotate(45deg)',
               zIndex: 0,
-              backgroundColor: "#fff",
+              backgroundColor: darkMode ? "#424242" : "#fff",
             },
           },
         }}
@@ -136,33 +136,33 @@ const MenuHeader = () => {
           onClick={handleProfile}
           sx={{
             '&:hover': {
-              backgroundColor: '#f0f0f0',
+              backgroundColor: darkMode ? "#616161" : '#f0f0f0',
             },
           }}
         >
-          <Avatar sx= {{backgroundColor: "#C0C0C0", color: "#fff"}} /> Profile
+          <Avatar sx={{ backgroundColor: darkMode ? "#616161" : "#C0C0C0", color: "#fff" }} /> Profile
         </MenuItem>
         <MenuItem 
           onClick={handleClose}
           sx={{
             '&:hover': {
-              backgroundColor: '#f0f0f0',
+              backgroundColor: darkMode ? "#616161" : '#f0f0f0',
             },
           }}
         >
-          <Avatar sx={{ backgroundColor: "#C0C0C0", color: "#fff" }} /> My account
+          <Avatar sx={{ backgroundColor: darkMode ? "#616161" : "#C0C0C0", color: "#fff"}} /> My account
         </MenuItem>
         <Divider />
         <MenuItem 
           onClick={handleClose}
           sx={{
             '&:hover': {
-              backgroundColor: '#f0f0f0',
+              backgroundColor: darkMode ? "#616161" : '#f0f0f0',
             },
           }}
         >
           <ListItemIcon>
-            <PersonAdd fontSize="small" sx={{ color: "#808080" }} />
+            <PersonAdd fontSize="small" sx={{ color: darkMode ? "#fff" : "#808080" }} />
           </ListItemIcon>
           Add another account
         </MenuItem>
@@ -170,12 +170,12 @@ const MenuHeader = () => {
           onClick={handleClose}
           sx={{
             '&:hover': {
-              backgroundColor: '#f0f0f0',
+              backgroundColor: darkMode ? "#616161" : '#f0f0f0',
             },
           }}
         >
           <ListItemIcon>
-            <Settings fontSize="small" sx={{ color: "#808080" }} />
+            <Settings fontSize="small" sx={{ color: darkMode ? "#fff" : "808080" }} />
           </ListItemIcon>
           Settings
         </MenuItem>
@@ -183,12 +183,12 @@ const MenuHeader = () => {
           onClick={handleLogout}
           sx={{
             '&:hover': {
-              backgroundColor: '#f0f0f0',
+              backgroundColor: darkMode ? "#616161" : '#f0f0f0',
             },
           }}
         >
           <ListItemIcon>
-            <Logout fontSize="small" sx={{ color: "#808080" }} />
+            <Logout fontSize="small" sx={{ color: darkMode ? "#fff" : "#808080"  }} />
           </ListItemIcon>
           Logout
         </MenuItem>
