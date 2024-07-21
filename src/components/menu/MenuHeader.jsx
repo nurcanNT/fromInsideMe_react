@@ -56,7 +56,7 @@ const MenuHeader = () => {
   const getInitial = (username) => {
     return username ? username.charAt(0).toUpperCase() : "M";
   };
-  
+
   return (
     <Nav style={navStyles}>
       <ul>
@@ -86,7 +86,7 @@ const MenuHeader = () => {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            <Avatar sx={{ width: 24, height: 24, fontSize:"14px", backgroundColor: "#C0C0C0",
+            <Avatar sx={{ width: 27, height: 27, fontSize:"14px", backgroundColor: "#C0C0C0",
               color: "#000" }}>
               {user ? getInitial(user.username) : "X"}
             </Avatar>
@@ -132,30 +132,63 @@ const MenuHeader = () => {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <MenuItem onClick={handleProfile}>
-          <Avatar sx= {{backgroundColor: "#C0C0C0",
-              color: "#fff",}} /> Profile
+        <MenuItem 
+          onClick={handleProfile}
+          sx={{
+            '&:hover': {
+              backgroundColor: '#f0f0f0',
+            },
+          }}
+        >
+          <Avatar sx= {{backgroundColor: "#C0C0C0", color: "#fff"}} /> Profile
         </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <Avatar sx={{ backgroundColor: "#C0C0C0",
-              color: "#fff",}} /> My account
+        <MenuItem 
+          onClick={handleClose}
+          sx={{
+            '&:hover': {
+              backgroundColor: '#f0f0f0',
+            },
+          }}
+        >
+          <Avatar sx={{ backgroundColor: "#C0C0C0", color: "#fff" }} /> My account
         </MenuItem>
         <Divider />
-        <MenuItem onClick={handleClose}>
+        <MenuItem 
+          onClick={handleClose}
+          sx={{
+            '&:hover': {
+              backgroundColor: '#f0f0f0',
+            },
+          }}
+        >
           <ListItemIcon>
-            <PersonAdd fontSize="small" sx= {{ color: "#808080"}} />
+            <PersonAdd fontSize="small" sx={{ color: "#808080" }} />
           </ListItemIcon>
           Add another account
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem 
+          onClick={handleClose}
+          sx={{
+            '&:hover': {
+              backgroundColor: '#f0f0f0',
+            },
+          }}
+        >
           <ListItemIcon>
-            <Settings fontSize="small" sx= {{ color: "#808080"}} />
+            <Settings fontSize="small" sx={{ color: "#808080" }} />
           </ListItemIcon>
           Settings
         </MenuItem>
-        <MenuItem onClick={handleLogout}>
+        <MenuItem 
+          onClick={handleLogout}
+          sx={{
+            '&:hover': {
+              backgroundColor: '#f0f0f0',
+            },
+          }}
+        >
           <ListItemIcon>
-            <Logout fontSize="small" sx= {{ color: "#808080"}} />
+            <Logout fontSize="small" sx={{ color: "#808080" }} />
           </ListItemIcon>
           Logout
         </MenuItem>
