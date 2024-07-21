@@ -17,16 +17,16 @@ const SideBarContainer = styled(Box)(({ theme }) => ({
 
 const SideBar = () => (
   <SideBarContainer>
-    <Typography variant="h6" gutterBottom>Hesap</Typography>
+    <Typography variant="h6" gutterBottom>Account</Typography>
     <List>
       <ListItem button>
-        <ListItemText primary="İletişim Tercihleri" />
+        <ListItemText primary="Communication" />
       </ListItem>
       <ListItem button>
-        <ListItemText primary="Notlar ve Öne Çıkanlar" />
+        <ListItemText primary="Notes and Highlights" />
       </ListItem>
       <ListItem button>
-        <ListItemText primary="Takvim Senkronizasyonu" />
+        <ListItemText primary="Calendar Sync" />
       </ListItem>
     </List>
   </SideBarContainer>
