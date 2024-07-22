@@ -34,11 +34,11 @@ export const StyledNavLink = styled(NavLink)`
   }
 
   &.active {
-    background-color: #009;
+    background-color: #333;
     color: white;
 
     &:hover {
-      background-color: #0056b3;
+      background-color: #C0C0C0;
     }
   }
 `;
