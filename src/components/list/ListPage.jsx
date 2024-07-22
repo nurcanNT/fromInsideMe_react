@@ -67,7 +67,7 @@ const ListPage = () => {
   };
 
   const [formData, setFormData] = useState({
-    rumuz: "",
+    username: "",
     email: userEmail || "",
     city: "",
     infoText: "",
@@ -93,7 +93,7 @@ const ListPage = () => {
     e.preventDefault();
     const newUserList = [...userList, formData];
     setUserList(newUserList);
-    setFormData({ rumuz: "", email: userEmail || "", city: "", infoText: "" });
+    setFormData({ username: "", email: userEmail || "", city: "", infoText: "" });
     setOpenModal(false);
     setFilteredUsers(newUserList);
   };
@@ -102,7 +102,7 @@ const ListPage = () => {
     const searchText = e.target.value.toLowerCase();
     const filteredUsers = userList.filter(
       (user) =>
-        user.rumuz.toLowerCase().includes(searchText) ||
+        user.username.toLowerCase().includes(searchText) ||
         user.email.toLowerCase().includes(searchText) ||
         user.city.toLowerCase().includes(searchText) ||
         user.infoText.toLowerCase().includes(searchText)
@@ -161,13 +161,13 @@ const ListPage = () => {
             </Typography>
             <form onSubmit={handleSubmit} id="user-form">
               <Box>
-                <label htmlFor="rumuz">Rumuz:</label>
+                <label htmlFor="username">Username:</label>
                 <TextField
                   sx={{ width: "100%" }}
                   type="text"
-                  id="rumuz"
-                  name="rumuz"
-                  value={formData.rumuz}
+                  id="username"
+                  name="username"
+                  value={formData.username}
                   onChange={handleInputChange}
                   inputRef={inputRef}
                 />
@@ -233,7 +233,7 @@ const ListPage = () => {
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead>
             <tr style={{ borderBottom: "1px solid #f0f0f0" }}>
-              <th style={updatedStyles.columnHeader}>Rumuz</th>
+              <th style={updatedStyles.columnHeader}>Username</th>
               <th style={updatedStyles.columnHeader}>Email</th>
               <th style={updatedStyles.columnHeader}>City</th>
               <th style={updatedStyles.columnHeader}>Info Text</th>
@@ -242,7 +242,7 @@ const ListPage = () => {
           <tbody>
             {filteredUsers.map((user, index) => (
               <tr key={index} style={{ borderBottom: "1px solid #f0f0f0" }}>
-                <td style={updatedStyles.cell}>{user.rumuz}</td>
+                <td style={updatedStyles.cell}>{user.username}</td>
                 <td style={updatedStyles.cell}>{user.email}</td>
                 <td style={updatedStyles.cell}>{user.city}</td>
                 <td style={updatedStyles.cell}>{user.infoText}</td>

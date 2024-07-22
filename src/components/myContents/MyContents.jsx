@@ -16,13 +16,13 @@ const MyContents = () => {
 
   const formik = useFormik({
     initialValues: {
-      rumuz: "",
+      username: "",
       email: userEmail || "",
       city: "",
       infoText: "",
     },
     validationSchema: Yup.object({
-      rumuz: Yup.string().required("Rumuz is required"),
+      username: Yup.string().required("Username is required"),
       infoText: Yup.string().required("Info Text is required"),
       email: Yup.string()
         .email("Invalid email address")
@@ -89,13 +89,13 @@ const MyContents = () => {
         <form onSubmit={formik.handleSubmit} style={styles.formStyles}>
           <TextField
             fullWidth
-            id="rumuz"
-            name="rumuz"
-            label="Rumuz"
-            value={formik.values.rumuz}
+            id="username"
+            name="username"
+            label="Username"
+            value={formik.values.username}
             onChange={formik.handleChange}
-            error={formik.touched.rumuz && Boolean(formik.errors.rumuz)}
-            helperText={formik.touched.rumuz && formik.errors.rumuz}
+            error={formik.touched.username && Boolean(formik.errors.username)}
+            helperText={formik.touched.username && formik.errors.username}
             style={styles.inputStyles}
             sx={styles.textFieldRoot}
           />
