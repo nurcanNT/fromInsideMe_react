@@ -83,7 +83,7 @@ const MemoizedMyList = memo(({ exampleData }) => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell style={styles.columnHeader}>Rumuz</TableCell>
+                <TableCell style={styles.columnHeader}>Username</TableCell>
                 <TableCell style={styles.columnHeader}>Email</TableCell>
                 <TableCell style={styles.columnHeader}>City</TableCell>
                 <TableCell style={styles.columnHeader}>Info Text</TableCell>
@@ -93,7 +93,7 @@ const MemoizedMyList = memo(({ exampleData }) => {
             <TableBody>
               {myList.map((user, index) => (
                 <TableRow key={index}>
-                  <TableCell style={styles.cell}>{user.rumuz}</TableCell>
+                  <TableCell style={styles.cell}>{user.username}</TableCell>
                   <TableCell style={styles.cell}>{user.email}</TableCell>
                   <TableCell style={styles.cell}>{user.city}</TableCell>
                   <TableCell style={styles.cell}>{user.infoText}</TableCell>
