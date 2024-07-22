@@ -60,7 +60,7 @@ const MyContents = () => {
     },
     buttonStyles: {
       marginTop: "10px",
-      color: darkMode ? "#fff" : "#000",
+      color: darkMode ? "#000" : "#fff",
     },
     listContainer: {
       margin: "20px",
