@@ -35,7 +35,7 @@ const MyContents = () => {
       setMyList(newList);
       localStorage.setItem("myList", JSON.stringify(newList));
       resetForm();
-      setOpenModal(false); // Modalı kapat
+      setOpenModal(false); 
     },
   });
 
