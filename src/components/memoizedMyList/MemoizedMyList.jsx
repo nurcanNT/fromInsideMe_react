@@ -1,4 +1,18 @@
-import { Button, ThemeProvider, CssBaseline, createTheme, Box, TextField, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import {
+  Button,
+  ThemeProvider,
+  CssBaseline,
+  createTheme,
+  Box,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Pagination
+} from "@mui/material";
 import React, { memo, useEffect, useState } from "react";
 import { styles } from "./MemoizedMyStyles";
 import { useSelector, useDispatch } from 'react-redux';
@@ -6,7 +20,6 @@ import SettingsBrightnessIcon from "@mui/icons-material/SettingsBrightness";
 import { toggleDarkMode } from "../../actions";
 
 const MemoizedMyList = memo(({ exampleData }) => {
-
   const dispatch = useDispatch();
   const darkMode = useSelector((state) => state.theme.darkMode);
 
@@ -49,6 +62,9 @@ const MemoizedMyList = memo(({ exampleData }) => {
     const storedList = JSON.parse(localStorage.getItem("myList"));
     return storedList ? storedList : exampleData;
   });
+  
+  const [currentPage, setCurrentPage] = useState(1);
+  const usersPerPage = 10;
 
   useEffect(() => {
     localStorage.setItem("myList", JSON.stringify(myList));
@@ -59,6 +75,12 @@ const MemoizedMyList = memo(({ exampleData }) => {
     newUserList.splice(index, 1);
     setMyList(newUserList);
   };
+
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
+
+  const currentUsers = myList.slice((currentPage - 1) * usersPerPage, currentPage * usersPerPage);
 
   return (
     <ThemeProvider theme={theme}>
@@ -91,7 +113,7 @@ const MemoizedMyList = memo(({ exampleData }) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {myList.map((user, index) => (
+              {currentUsers.map((user, index) => (
                 <TableRow key={index}>
                   <TableCell style={styles.cell}>{user.username}</TableCell>
                   <TableCell style={styles.cell}>{user.email}</TableCell>
@@ -107,6 +129,12 @@ const MemoizedMyList = memo(({ exampleData }) => {
             </TableBody>
           </Table>
         </TableContainer>
+        <Pagination
+          count={Math.ceil(myList.length / usersPerPage)}
+          page={currentPage}
+          onChange={handlePageChange}
+          sx={{ display: "flex", justifyContent: "center", marginTop: "20px" }}
+        />
       </Box>
     </ThemeProvider>
   );
