@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Button, TextField, Typography, Box, Modal, createTheme, ThemeProvider, CssBaseline  } from "@mui/material";
+import { Button, TextField, Typography, Box, Modal, createTheme, ThemeProvider, CssBaseline, Pagination } from "@mui/material";
 import MenuHeader from "../menu/MenuHeader";
 import { styles } from "./ListStyle";
 import EmailInput from "../EmailInput";
@@ -7,13 +7,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { create, addUser } from "../../actions";
 import SettingsBrightnessIcon from "@mui/icons-material/SettingsBrightness";
 import { toggleDarkMode } from "../../actions.js";
-import { Margin } from "@mui/icons-material";
 
 const ListPage = () => {
   const [userList, setUserList] = useState(() => {
     return JSON.parse(localStorage.getItem("userList")) || [];
   });
   const [filteredUsers, setFilteredUsers] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const usersPerPage = 10;
   const inputRef = useRef();
   const dispatch = useDispatch();
   const userEmail = useSelector(state => state.auth.user?.email);
@@ -113,6 +114,12 @@ const ListPage = () => {
   useEffect(() => {
     setFilteredUsers(userList);
   }, [userList]);
+
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
+
+  const currentUsers = filteredUsers.slice((currentPage - 1) * usersPerPage, currentPage * usersPerPage);
 
   return (
     <ThemeProvider theme={theme}>
@@ -240,7 +247,7 @@ const ListPage = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredUsers.map((user, index) => (
+            {currentUsers.map((user, index) => (
               <tr key={index} style={{ borderBottom: "1px solid #f0f0f0" }}>
                 <td style={updatedStyles.cell}>{user.username}</td>
                 <td style={updatedStyles.cell}>{user.email}</td>
@@ -250,6 +257,12 @@ const ListPage = () => {
             ))}
           </tbody>
         </table>
+        <Pagination
+          count={Math.ceil(filteredUsers.length / usersPerPage)}
+          page={currentPage}
+          onChange={handlePageChange}
+          sx={{ display: "flex", justifyContent: "center", marginTop: "20px" }}
+        />
       </Box>
     </ThemeProvider>
   );
