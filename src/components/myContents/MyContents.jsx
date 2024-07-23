@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import MenuHeader from "../menu/MenuHeader";
-import { Box, TextField, Button, Typography } from "@mui/material";
+import { Box, TextField, Button, Typography, Modal } from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import MemoizedMyList from "../memoizedMyList/MemoizedMyList";
@@ -13,6 +13,8 @@ const MyContents = () => {
   const [myList, setMyList] = useState(() => {
     return JSON.parse(localStorage.getItem("myList")) || [];
   });
+
+  const [openModal, setOpenModal] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -33,6 +35,7 @@ const MyContents = () => {
       setMyList(newList);
       localStorage.setItem("myList", JSON.stringify(newList));
       resetForm();
+      setOpenModal(false); // Modalı kapat
     },
   });
 
@@ -47,8 +50,6 @@ const MyContents = () => {
       width: "400px",
       borderRadius: "8px",
       boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
-      margin: "50px",
-      marginLeft: "500px", 
     },
     formStyles: {
       display: "flex",
@@ -83,67 +84,82 @@ const MyContents = () => {
   };
 
   return (
-    <Box sx={{padding: 1}}>
+    <Box sx={{ padding: 1 }}>
       <MenuHeader />
-      <Box sx={styles.formContainer}>
-        <form onSubmit={formik.handleSubmit} style={styles.formStyles}>
-          <TextField
-            fullWidth
-            id="username"
-            name="username"
-            label="Username"
-            value={formik.values.username}
-            onChange={formik.handleChange}
-            error={formik.touched.username && Boolean(formik.errors.username)}
-            helperText={formik.touched.username && formik.errors.username}
-            style={styles.inputStyles}
-            sx={styles.textFieldRoot}
-          />
-          <TextField
-            fullWidth
-            id="email"
-            name="email"
-            label="Email"
-            value={formik.values.email}
-            onChange={formik.handleChange}
-            error={formik.touched.email && Boolean(formik.errors.email)}
-            helperText={formik.touched.email && formik.errors.email}
-            style={styles.inputStyles}
-            sx={styles.textFieldRoot}
-          />
-          <TextField
-            fullWidth
-            id="city"
-            name="city"
-            label="City"
-            value={formik.values.city}
-            onChange={formik.handleChange}
-            style={styles.inputStyles}
-            sx={styles.textFieldRoot}
-          />
-          <TextField
-            fullWidth
-            id="infoText"
-            name="infoText"
-            label="Info Text"
-            value={formik.values.infoText}
-            onChange={formik.handleChange}
-            error={formik.touched.infoText && Boolean(formik.errors.infoText)}
-            helperText={formik.touched.infoText && formik.errors.infoText}
-            style={styles.inputStyles}
-            sx={styles.textFieldRoot}
-          />
-          
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            style={styles.buttonStyles}
-          >
-            Submit
-          </Button>
-        </form>
+      <Box sx={{ textAlign: "center", marginTop: "20px" }}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => setOpenModal(true)}
+        >
+          Submit
+        </Button>
       </Box>
+      <Modal
+        open={openModal}
+        onClose={() => setOpenModal(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={{ ...styles.formContainer, margin: "auto", marginTop: "10%" }}>
+          <form onSubmit={formik.handleSubmit} style={styles.formStyles}>
+            <TextField
+              fullWidth
+              id="username"
+              name="username"
+              label="Username"
+              value={formik.values.username}
+              onChange={formik.handleChange}
+              error={formik.touched.username && Boolean(formik.errors.username)}
+              helperText={formik.touched.username && formik.errors.username}
+              style={styles.inputStyles}
+              sx={styles.textFieldRoot}
+            />
+            <TextField
+              fullWidth
+              id="email"
+              name="email"
+              label="Email"
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              error={formik.touched.email && Boolean(formik.errors.email)}
+              helperText={formik.touched.email && formik.errors.email}
+              style={styles.inputStyles}
+              sx={styles.textFieldRoot}
+            />
+            <TextField
+              fullWidth
+              id="city"
+              name="city"
+              label="City"
+              value={formik.values.city}
+              onChange={formik.handleChange}
+              style={styles.inputStyles}
+              sx={styles.textFieldRoot}
+            />
+            <TextField
+              fullWidth
+              id="infoText"
+              name="infoText"
+              label="Info Text"
+              value={formik.values.infoText}
+              onChange={formik.handleChange}
+              error={formik.touched.infoText && Boolean(formik.errors.infoText)}
+              helperText={formik.touched.infoText && formik.errors.infoText}
+              style={styles.inputStyles}
+              sx={styles.textFieldRoot}
+            />
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              style={styles.buttonStyles}
+            >
+              Submit
+            </Button>
+          </form>
+        </Box>
+      </Modal>
       <Box sx={styles.listContainer}>
         <Typography variant="h5" sx={styles.listTitle}>
           MyContents
