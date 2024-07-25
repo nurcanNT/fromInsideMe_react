@@ -78,7 +78,7 @@ const MyContents = () => {
         color: darkMode ? "#fff" : "#000", 
       },
       "& .MuiFormHelperText-root": {
-        color: darkMode ? "#fff" : "#000", 
+        color: darkMode ? "#ffff" : "#000", 
       },
     },
   };
