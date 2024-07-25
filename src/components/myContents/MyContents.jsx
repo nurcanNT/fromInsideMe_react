@@ -92,7 +92,7 @@ const MyContents = () => {
           color="primary"
           onClick={() => setOpenModal(true)}
         >
-          Submit
+          My New Content
         </Button>
       </Box>
       <Modal
