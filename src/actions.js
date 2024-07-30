@@ -15,10 +15,7 @@ export const logout = () => ({
   type: LOGOUT
 });
 
-export const register = (user) => ({
-  type: REGISTER,
-  payload: user
-});
+
 
 export const create = (email) => ({
     type: CREATE,
