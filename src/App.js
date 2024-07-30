@@ -30,7 +30,7 @@ const App = () => {
             <Route path="/homePage/HomePage" element={<HomePage />} />
             <Route path="/myContents/MyContents" element={<MyContents />} />
             <Route path="/list/ListPage" element={<ListPage />} />
-            <Route path="/profile/AccountProfile" element={<AccountProfile />} />
+            
           </Routes>
       </Router>
     </ThemeProvider>
