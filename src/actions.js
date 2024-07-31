@@ -12,7 +12,7 @@ export const login = (user) => ({
 });
 
 export const logout = () => ({
-  type: LOGOUT
+  
 });
 
 export const register = (user) => ({
