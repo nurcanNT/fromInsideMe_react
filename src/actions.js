@@ -7,7 +7,8 @@ export const TOGGLE_DARK_MODE = 'TOGGLE_DARK_MODE';
 export const UPDATE_PROFILE = 'UPDATE_PROFILE';
 
 export const login = (user) => ({
- 
+  type: LOGIN,
+  payload: user
 });
 
 export const logout = () => ({
