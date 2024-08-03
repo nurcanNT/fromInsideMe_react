@@ -64,7 +64,7 @@ const MemoizedMyList = memo(({ exampleData }) => {
   });
   
   const [currentPage, setCurrentPage] = useState(1);
-  const usersPerPage = 10;
+  const usersPerPage = 8;
 
   useEffect(() => {
     localStorage.setItem("myList", JSON.stringify(myList));

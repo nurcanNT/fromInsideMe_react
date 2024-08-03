@@ -161,8 +161,8 @@ const MyContents = () => {
         </Box>
       </Modal>
       <Box sx={styles.listContainer}>
-        <Typography variant="h5" sx={styles.listTitle}>
-          MyContents
+        <Typography variant="h4" sx={styles.listTitle}>
+          My Contents
         </Typography>
         <MemoizedMyList exampleData={myList} />
       </Box>

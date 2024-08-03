@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Button, TextField, Typography, Box, Modal, createTheme, ThemeProvider, CssBaseline, Pagination } from "@mui/material";
+import { Button, TextField, Typography, Box, Modal, createTheme, ThemeProvider, CssBaseline, Pagination, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Paper } from "@mui/material";
 import MenuHeader from "../menu/MenuHeader";
 import { styles } from "./ListStyle";
 import EmailInput from "../EmailInput";
@@ -236,27 +236,29 @@ const ListPage = () => {
           onChange={handleSearch}
         />
 
-        <Typography variant="h2">User List</Typography>
-        <table style={{ width: "100%", borderCollapse: "collapse" }}>
-          <thead>
-            <tr style={{ borderBottom: "1px solid #f0f0f0" }}>
-              <th style={updatedStyles.columnHeader}>Username</th>
-              <th style={updatedStyles.columnHeader}>Email</th>
-              <th style={updatedStyles.columnHeader}>City</th>
-              <th style={updatedStyles.columnHeader}>Info Text</th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentUsers.map((user, index) => (
-              <tr key={index} style={{ borderBottom: "1px solid #f0f0f0" }}>
-                <td style={updatedStyles.cell}>{user.username}</td>
-                <td style={updatedStyles.cell}>{user.email}</td>
-                <td style={updatedStyles.cell}>{user.city}</td>
-                <td style={updatedStyles.cell}>{user.infoText}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <Typography variant="h4" style={{ marginBottom: "10px"}}>User List</Typography>
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell style={updatedStyles.columnHeader}>Username</TableCell>
+                <TableCell style={updatedStyles.columnHeader}>Email</TableCell>
+                <TableCell style={updatedStyles.columnHeader}>City</TableCell>
+                <TableCell style={updatedStyles.columnHeader}>Info Text</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {currentUsers.map((user, index) => (
+                <TableRow key={index}>
+                  <TableCell style={updatedStyles.cell}>{user.username}</TableCell>
+                  <TableCell style={updatedStyles.cell}>{user.email}</TableCell>
+                  <TableCell style={updatedStyles.cell}>{user.city}</TableCell>
+                  <TableCell style={updatedStyles.cell}>{user.infoText}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
         <Pagination
           count={Math.ceil(filteredUsers.length / usersPerPage)}
           page={currentPage}
