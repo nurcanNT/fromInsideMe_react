@@ -16,6 +16,8 @@ import {
   TableCell,
   TableBody,
   Paper,
+  Collapse,
+  IconButton,
 } from "@mui/material";
 import MenuHeader from "../menu/MenuHeader";
 import { styles } from "./ListStyle";
@@ -24,6 +26,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { create, addUser } from "../../actions";
 import SettingsBrightnessIcon from "@mui/icons-material/SettingsBrightness";
 import { toggleDarkMode } from "../../actions.js";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
 const ListPage = () => {
   const [userList, setUserList] = useState(() => {
@@ -142,6 +146,7 @@ const ListPage = () => {
 
   const handleUserClick = (user) => {
     setSelectedUser(user);
+    setComment(user.comment || "");
     setOpenCommentModal(true);
   };
 
@@ -167,6 +172,52 @@ const ListPage = () => {
     (currentPage - 1) * usersPerPage,
     currentPage * usersPerPage
   );
+
+  const CollapsibleRow = ({ user }) => {
+    const [open, setOpen] = useState(false);
+
+    return (
+      <>
+        <TableRow
+          onClick={() => handleUserClick(user)}
+          sx={{ cursor: "pointer" }}
+        >
+          <TableCell>
+            <IconButton
+              aria-label="expand row"
+              size="small"
+              onClick={(e) => {
+                e.stopPropagation();
+                setOpen(!open);
+              }}
+            >
+              {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            </IconButton>
+          </TableCell>
+          <TableCell>{user.username}</TableCell>
+          <TableCell>{user.email}</TableCell>
+          <TableCell>{user.city}</TableCell>
+          <TableCell>{user.infoText}</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={5}>
+            <Collapse in={open} timeout="auto" unmountOnExit>
+              <Box sx={{ margin: 1 }}>
+                <Typography variant="h6" gutterBottom component="div">
+                  Comments
+                </Typography>
+                {user.comment ? (
+                  <Typography>{user.comment}</Typography>
+                ) : (
+                  <Typography>No comments</Typography>
+                )}
+              </Box>
+            </Collapse>
+          </TableCell>
+        </TableRow>
+      </>
+    );
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -269,6 +320,7 @@ const ListPage = () => {
             </form>
           </Box>
         </Modal>
+
         <input
           type="text"
           id="searchInput"
@@ -289,27 +341,19 @@ const ListPage = () => {
           User List
         </Typography>
         <TableContainer component={Paper}>
-          <Table>
+          <Table aria-label="collapsible table">
             <TableHead>
               <TableRow>
-                <TableCell style={updatedStyles.columnHeader}>Username</TableCell>
-                <TableCell style={updatedStyles.columnHeader}>Email</TableCell>
-                <TableCell style={updatedStyles.columnHeader}>City</TableCell>
-                <TableCell style={updatedStyles.columnHeader}>Info Text</TableCell>
+                <TableCell />
+                <TableCell>Username</TableCell>
+                <TableCell>Email</TableCell>
+                <TableCell>City</TableCell>
+                <TableCell>Info Text</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {currentUsers.map((user, index) => (
-                <TableRow
-                  key={index}
-                  onClick={() => handleUserClick(user)}
-                  style={{ cursor: "pointer" }}
-                >
-                  <TableCell style={updatedStyles.cell}>{user.username}</TableCell>
-                  <TableCell style={updatedStyles.cell}>{user.email}</TableCell>
-                  <TableCell style={updatedStyles.cell}>{user.city}</TableCell>
-                  <TableCell style={updatedStyles.cell}>{user.infoText}</TableCell>
-                </TableRow>
+                <CollapsibleRow key={index} user={user} />
               ))}
             </TableBody>
           </Table>
@@ -321,6 +365,7 @@ const ListPage = () => {
           sx={{ display: "flex", justifyContent: "center", marginTop: "20px" }}
         />
       </Box>
+
       <Modal
         open={openCommentModal}
         onClose={() => setOpenCommentModal(false)}
