@@ -1,9 +1,26 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Button, TextField, Typography, Box, Modal, createTheme, ThemeProvider, CssBaseline, Pagination, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Paper } from "@mui/material";
+import {
+  Button,
+  TextField,
+  Typography,
+  Box,
+  Modal,
+  createTheme,
+  ThemeProvider,
+  CssBaseline,
+  Pagination,
+  TableContainer,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+  Paper,
+} from "@mui/material";
 import MenuHeader from "../menu/MenuHeader";
 import { styles } from "./ListStyle";
 import EmailInput from "../EmailInput";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 import { create, addUser } from "../../actions";
 import SettingsBrightnessIcon from "@mui/icons-material/SettingsBrightness";
 import { toggleDarkMode } from "../../actions.js";
@@ -14,10 +31,12 @@ const ListPage = () => {
   });
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [comment, setComment] = useState("");
   const usersPerPage = 10;
   const inputRef = useRef();
   const dispatch = useDispatch();
-  const userEmail = useSelector(state => state.auth.user?.email);
+  const userEmail = useSelector((state) => state.auth.user?.email);
   const darkMode = useSelector((state) => state.theme.darkMode);
   const theme = createTheme({
     palette: {
@@ -27,7 +46,7 @@ const ListPage = () => {
         paper: darkMode ? "#333" : "#fff",
       },
       text: {
-        primary: darkMode ? "#fff" : "#000"
+        primary: darkMode ? "#fff" : "#000",
       },
     },
     components: {
@@ -64,6 +83,7 @@ const ListPage = () => {
     cell: {
       ...styles.cell,
       color: darkMode ? "#fff" : "#000",
+      cursor: "pointer",
     },
   };
 
@@ -74,6 +94,7 @@ const ListPage = () => {
     infoText: "",
   });
   const [openModal, setOpenModal] = useState(false);
+  const [openCommentModal, setOpenCommentModal] = useState(false);
 
   useEffect(() => {
     localStorage.setItem("userList", JSON.stringify(userList));
@@ -119,7 +140,33 @@ const ListPage = () => {
     setCurrentPage(value);
   };
 
-  const currentUsers = filteredUsers.slice((currentPage - 1) * usersPerPage, currentPage * usersPerPage);
+  const handleUserClick = (user) => {
+    setSelectedUser(user);
+    setOpenCommentModal(true);
+  };
+
+  const handleCommentChange = (e) => {
+    setComment(e.target.value);
+  };
+
+  const handleCommentSubmit = () => {
+    if (selectedUser) {
+      const updatedUserList = userList.map((user) =>
+        user.email === selectedUser.email
+          ? { ...user, comment: comment }
+          : user
+      );
+      setUserList(updatedUserList);
+      setComment("");
+      setSelectedUser(null);
+      setOpenCommentModal(false);
+    }
+  };
+
+  const currentUsers = filteredUsers.slice(
+    (currentPage - 1) * usersPerPage,
+    currentPage * usersPerPage
+  );
 
   return (
     <ThemeProvider theme={theme}>
@@ -130,13 +177,15 @@ const ListPage = () => {
           {darkMode ? "Dark Mode" : "Light Mode"}
         </Button>
       </Box>
-      <Box sx={{
+      <Box
+        sx={{
           backgroundColor: darkMode ? "background.default" : "background.paper",
           color: darkMode ? "text.primary" : "text.primary",
           padding: 1,
           borderRadius: 1,
           boxShadow: 3,
-        }}>
+        }}
+      >
         <MenuHeader />
         <Box sx={{ marginLeft: "80%", marginTop: "1rem" }}>
           <Button variant="contained" onClick={() => setOpenModal(true)}>
@@ -229,14 +278,16 @@ const ListPage = () => {
             marginTop: "20px",
             width: "400px",
             height: "35px",
-            borderRadius: "8px", 
+            borderRadius: "8px",
             padding: "5px 10px",
-            border: "1px solid #ccc", 
+            border: "1px solid #ccc",
           }}
           onChange={handleSearch}
         />
 
-        <Typography variant="h4" style={{ marginBottom: "10px"}}>User List</Typography>
+        <Typography variant="h4" style={{ marginBottom: "10px" }}>
+          User List
+        </Typography>
         <TableContainer component={Paper}>
           <Table>
             <TableHead>
@@ -249,7 +300,11 @@ const ListPage = () => {
             </TableHead>
             <TableBody>
               {currentUsers.map((user, index) => (
-                <TableRow key={index}>
+                <TableRow
+                  key={index}
+                  onClick={() => handleUserClick(user)}
+                  style={{ cursor: "pointer" }}
+                >
                   <TableCell style={updatedStyles.cell}>{user.username}</TableCell>
                   <TableCell style={updatedStyles.cell}>{user.email}</TableCell>
                   <TableCell style={updatedStyles.cell}>{user.city}</TableCell>
@@ -266,6 +321,44 @@ const ListPage = () => {
           sx={{ display: "flex", justifyContent: "center", marginTop: "20px" }}
         />
       </Box>
+      <Modal
+        open={openCommentModal}
+        onClose={() => setOpenCommentModal(false)}
+        aria-labelledby="comment-modal-title"
+        aria-describedby="comment-modal-description"
+      >
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: 400,
+            bgcolor: "background.paper",
+            border: "2px solid #000",
+            boxShadow: 24,
+            p: 4,
+          }}
+        >
+          <Typography variant="h4" id="comment-modal-title" gutterBottom>
+            Add Comment for {selectedUser?.username}
+          </Typography>
+          <TextField
+            sx={{ width: "100%" }}
+            multiline
+            rows={4}
+            value={comment}
+            onChange={handleCommentChange}
+          />
+          <Button
+            variant="contained"
+            sx={{ marginTop: "10px" }}
+            onClick={handleCommentSubmit}
+          >
+            Submit Comment
+          </Button>
+        </Box>
+      </Modal>
     </ThemeProvider>
   );
 };
