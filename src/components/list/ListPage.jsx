@@ -202,6 +202,7 @@ const ListPage = () => {
                     <TableHead>
                       <TableRow>
                         <TableCell>Date</TableCell>
+                        <TableCell>Username</TableCell>
                         <TableCell>Comment</TableCell>
                       </TableRow>
                     </TableHead>
