@@ -175,11 +175,25 @@ const ListPage = () => {
 
   const CollapsibleRow = ({ user }) => {
     const [open, setOpen] = useState(false);
-
+    const [comment, setComment] = useState("");
+    const [comments, setComments] = useState(user.comments || []);
+    const [date, setDate] = useState(new Date().toLocaleDateString());
+  
+    const handleCommentChange = (e) => {
+      setComment(e.target.value);
+    };
+  
+    const handleCommentSubmit = () => {
+      if (comment.trim()) {
+        const newComment = { date: date, username: user.username, comment: comment };
+        setComments([...comments, newComment]);
+        setComment("");
+      }
+    };
+  
     return (
       <>
         <TableRow
-          onClick={() => handleUserClick(user)}
           sx={{ cursor: "pointer" }}
         >
           <TableCell>
@@ -206,11 +220,43 @@ const ListPage = () => {
                 <Typography variant="h6" gutterBottom component="div">
                   Comments
                 </Typography>
-                {user.comment ? (
-                  <Typography>{user.comment}</Typography>
+                {comments.length > 0 ? (
+                  <Table size="small" aria-label="comments">
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>Date</TableCell>
+                        <TableCell>Username</TableCell>
+                        <TableCell>Comment</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {comments.map((comment, index) => (
+                        <TableRow key={index}>
+                          <TableCell>{comment.date}</TableCell>
+                          <TableCell>{comment.username}</TableCell>
+                          <TableCell>{comment.comment}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
                 ) : (
                   <Typography>No comments</Typography>
                 )}
+                <TextField
+                  sx={{ width: '100%', marginTop: 2 }}
+                  multiline
+                  rows={2}
+                  value={comment}
+                  onChange={handleCommentChange}
+                  placeholder="Add a comment"
+                />
+                <Button
+                  variant="contained"
+                  sx={{ marginTop: 1 }}
+                  onClick={handleCommentSubmit}
+                >
+                  Add Comment
+                </Button>
               </Box>
             </Collapse>
           </TableCell>
