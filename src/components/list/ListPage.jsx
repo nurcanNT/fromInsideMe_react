@@ -35,8 +35,6 @@ const ListPage = () => {
   });
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedUser, setSelectedUser] = useState(null);
-  const [comment, setComment] = useState("");
   const usersPerPage = 10;
   const inputRef = useRef();
   const dispatch = useDispatch();
@@ -98,7 +96,6 @@ const ListPage = () => {
     infoText: "",
   });
   const [openModal, setOpenModal] = useState(false);
-  const [openCommentModal, setOpenCommentModal] = useState(false);
 
   useEffect(() => {
     localStorage.setItem("userList", JSON.stringify(userList));
@@ -144,30 +141,6 @@ const ListPage = () => {
     setCurrentPage(value);
   };
 
-  const handleUserClick = (user) => {
-    setSelectedUser(user);
-    setComment(user.comment || "");
-    setOpenCommentModal(true);
-  };
-
-  const handleCommentChange = (e) => {
-    setComment(e.target.value);
-  };
-
-  const handleCommentSubmit = () => {
-    if (selectedUser) {
-      const updatedUserList = userList.map((user) =>
-        user.email === selectedUser.email
-          ? { ...user, comment: comment }
-          : user
-      );
-      setUserList(updatedUserList);
-      setComment("");
-      setSelectedUser(null);
-      setOpenCommentModal(false);
-    }
-  };
-
   const currentUsers = filteredUsers.slice(
     (currentPage - 1) * usersPerPage,
     currentPage * usersPerPage
@@ -176,26 +149,30 @@ const ListPage = () => {
   const CollapsibleRow = ({ user }) => {
     const [open, setOpen] = useState(false);
     const [comment, setComment] = useState("");
-    const [comments, setComments] = useState(user.comments || []);
-    const [date, setDate] = useState(new Date().toLocaleDateString());
-  
+    const [comments, setComments] = useState(() => {
+      const savedComments = JSON.parse(localStorage.getItem(user.username + '_comments')) || [];
+      return savedComments;
+    });
+
+    useEffect(() => {
+      localStorage.setItem(user.username + '_comments', JSON.stringify(comments));
+    }, [comments, user.username]);
+
     const handleCommentChange = (e) => {
       setComment(e.target.value);
     };
-  
+
     const handleCommentSubmit = () => {
       if (comment.trim()) {
-        const newComment = { date: date, username: user.username, comment: comment };
+        const newComment = { date: new Date().toLocaleDateString(), username: user.username, comment: comment };
         setComments([...comments, newComment]);
         setComment("");
       }
     };
-  
+
     return (
       <>
-        <TableRow
-          sx={{ cursor: "pointer" }}
-        >
+        <TableRow sx={{ cursor: "pointer" }}>
           <TableCell>
             <IconButton
               aria-label="expand row"
@@ -411,45 +388,6 @@ const ListPage = () => {
           sx={{ display: "flex", justifyContent: "center", marginTop: "20px" }}
         />
       </Box>
-
-      <Modal
-        open={openCommentModal}
-        onClose={() => setOpenCommentModal(false)}
-        aria-labelledby="comment-modal-title"
-        aria-describedby="comment-modal-description"
-      >
-        <Box
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: 400,
-            bgcolor: "background.paper",
-            border: "2px solid #000",
-            boxShadow: 24,
-            p: 4,
-          }}
-        >
-          <Typography variant="h4" id="comment-modal-title" gutterBottom>
-            Add Comment for {selectedUser?.username}
-          </Typography>
-          <TextField
-            sx={{ width: "100%" }}
-            multiline
-            rows={4}
-            value={comment}
-            onChange={handleCommentChange}
-          />
-          <Button
-            variant="contained"
-            sx={{ marginTop: "10px" }}
-            onClick={handleCommentSubmit}
-          >
-            Submit Comment
-          </Button>
-        </Box>
-      </Modal>
     </ThemeProvider>
   );
 };
