@@ -96,6 +96,7 @@ const ListPage = () => {
     infoText: "",
   });
   const [openModal, setOpenModal] = useState(false);
+  const [openRow, setOpenRow] = useState(null); 
 
   useEffect(() => {
     localStorage.setItem("userList", JSON.stringify(userList));
@@ -146,8 +147,7 @@ const ListPage = () => {
     currentPage * usersPerPage
   );
 
-  const CollapsibleRow = ({ user }) => {
-    const [open, setOpen] = useState(false);
+  const CollapsibleRow = ({ user, isOpen, onRowClick }) => {
     const [comment, setComment] = useState("");
     const [comments, setComments] = useState(() => {
       const savedComments = JSON.parse(localStorage.getItem(user.username + '_comments')) || [];
@@ -172,17 +172,17 @@ const ListPage = () => {
 
     return (
       <>
-        <TableRow sx={{ cursor: "pointer" }}>
+        <TableRow sx={{ cursor: "pointer" }} onClick={() => onRowClick(user.username)}>
           <TableCell>
             <IconButton
               aria-label="expand row"
               size="small"
               onClick={(e) => {
                 e.stopPropagation();
-                setOpen(!open);
+                onRowClick(user.username);
               }}
             >
-              {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+              {isOpen ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
             </IconButton>
           </TableCell>
           <TableCell>{user.username}</TableCell>
@@ -192,7 +192,7 @@ const ListPage = () => {
         </TableRow>
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={5}>
-            <Collapse in={open} timeout="auto" unmountOnExit>
+            <Collapse in={isOpen} timeout="auto" unmountOnExit>
               <Box sx={{ margin: 1 }}>
                 <Typography variant="h6" gutterBottom component="div">
                   Comments
@@ -376,7 +376,12 @@ const ListPage = () => {
             </TableHead>
             <TableBody>
               {currentUsers.map((user, index) => (
-                <CollapsibleRow key={index} user={user} />
+                <CollapsibleRow
+                  key={index}
+                  user={user}
+                  isOpen={openRow === user.username}
+                  onRowClick={(username) => setOpenRow(openRow === username ? null : username)}
+                />
               ))}
             </TableBody>
           </Table>
