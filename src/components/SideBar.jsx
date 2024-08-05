@@ -17,7 +17,6 @@ const SideBarContainer = styled(Box)(({ theme }) => ({
 
 const SideBar = () => (
   <SideBarContainer>
-    <Typography variant="h6" gutterBottom>Account</Typography>
     <List>
       <ListItem button>
         <ListItemText primary="Communication" />
