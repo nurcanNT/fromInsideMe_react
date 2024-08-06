@@ -68,6 +68,7 @@ const MyContents = () => {
     },
     listTitle: {
       marginBottom: "10px",
+      marginLeft: "15px",
       color: darkMode ? "#fff" : "#000",
     },
     textFieldRoot: {
