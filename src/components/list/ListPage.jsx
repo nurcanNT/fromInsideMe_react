@@ -363,29 +363,31 @@ const ListPage = () => {
         <Typography variant="h4" style={{ marginBottom: "10px" }}>
           User List
         </Typography>
-        <TableContainer component={Paper}>
-          <Table aria-label="collapsible table">
-            <TableHead>
-              <TableRow>
-                <TableCell />
-                <TableCell>Username</TableCell>
-                <TableCell>Email</TableCell>
-                <TableCell>City</TableCell>
-                <TableCell>Info Text</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {currentUsers.map((user, index) => (
-                <CollapsibleRow
-                  key={index}
-                  user={user}
-                  isOpen={openRow === user.username}
-                  onRowClick={(username) => setOpenRow(openRow === username ? null : username)}
-                />
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+        <Box sx={{ width: '95%', maxHeight: '600px', overflow: 'auto', margin: 'auto' }}>
+          <TableContainer component={Paper}>
+            <Table aria-label="collapsible table">
+              <TableHead>
+                <TableRow>
+                  <TableCell />
+                  <TableCell>Username</TableCell>
+                  <TableCell>Email</TableCell>
+                  <TableCell>City</TableCell>
+                  <TableCell>Info Text</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {currentUsers.map((user, index) => (
+                  <CollapsibleRow
+                    key={index}
+                    user={user}
+                    isOpen={openRow === user.username}
+                    onRowClick={(username) => setOpenRow(openRow === username ? null : username)}
+                  />
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Box>
         <Pagination
           count={Math.ceil(filteredUsers.length / usersPerPage)}
           page={currentPage}
