@@ -33,7 +33,7 @@ const ListPage = () => {
   const [userList, setUserList] = useState(() => {
     return JSON.parse(localStorage.getItem("userList")) || [];
   });
-  const [filteredUsers, setFilteredUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState(userList);
   const [currentPage, setCurrentPage] = useState(1);
   const usersPerPage = 10;
   const inputRef = useRef();
@@ -124,13 +124,19 @@ const ListPage = () => {
 
   const handleSearch = (e) => {
     const searchText = e.target.value.toLowerCase();
-    const filteredUsers = userList.filter(
-      (user) =>
-        user.username.toLowerCase().includes(searchText) ||
-        user.email.toLowerCase().includes(searchText) ||
-        user.city.toLowerCase().includes(searchText) ||
-        user.infoText.toLowerCase().includes(searchText)
-    );
+    const filteredUsers = userList.filter((user) => {
+      const username = user.username ? user.username.toLowerCase() : "";
+      const email = user.email ? user.email.toLowerCase() : "";
+      const city = user.city ? user.city.toLowerCase() : "";
+      const infoText = user.infoText ? user.infoText.toLowerCase() : "";
+
+      return (
+        username.includes(searchText) ||
+        email.includes(searchText) ||
+        city.includes(searchText) ||
+        infoText.includes(searchText)
+      );
+    });
     setFilteredUsers(filteredUsers);
   };
 
