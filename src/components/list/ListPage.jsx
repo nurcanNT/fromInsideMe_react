@@ -39,6 +39,7 @@ const ListPage = () => {
   const inputRef = useRef();
   const dispatch = useDispatch();
   const userEmail = useSelector((state) => state.auth.user?.email);
+  const user = useSelector((state) => state.auth.user);
   const darkMode = useSelector((state) => state.theme.darkMode);
   const theme = createTheme({
     palette: {
@@ -96,7 +97,7 @@ const ListPage = () => {
     infoText: "",
   });
   const [openModal, setOpenModal] = useState(false);
-  const [openRow, setOpenRow] = useState(null); 
+  const [openRow, setOpenRow] = useState(null);
 
   useEffect(() => {
     localStorage.setItem("userList", JSON.stringify(userList));
@@ -155,13 +156,14 @@ const ListPage = () => {
 
   const CollapsibleRow = ({ user, isOpen, onRowClick }) => {
     const [comment, setComment] = useState("");
+    const currentUser = useSelector((state) => state.auth.user);
     const [comments, setComments] = useState(() => {
-      const savedComments = JSON.parse(localStorage.getItem(user.username + '_comments')) || [];
+      const savedComments = JSON.parse(localStorage.getItem(user.username + "_comments")) || [];
       return savedComments;
     });
 
     useEffect(() => {
-      localStorage.setItem(user.username + '_comments', JSON.stringify(comments));
+      localStorage.setItem(user.username + "_comments", JSON.stringify(comments));
     }, [comments, user.username]);
 
     const handleCommentChange = (e) => {
@@ -170,7 +172,7 @@ const ListPage = () => {
 
     const handleCommentSubmit = () => {
       if (comment.trim()) {
-        const newComment = { date: new Date().toLocaleDateString(), username: user.username, comment: comment };
+        const newComment = { date: new Date().toLocaleDateString(), username: currentUser.username, comment: comment };
         setComments([...comments, newComment]);
         setComment("");
       }
@@ -226,7 +228,7 @@ const ListPage = () => {
                   <Typography>No comments</Typography>
                 )}
                 <TextField
-                  sx={{ width: '100%', marginTop: 2 }}
+                  sx={{ width: "100%", marginTop: 2 }}
                   multiline
                   rows={2}
                   value={comment}
@@ -253,8 +255,7 @@ const ListPage = () => {
       <CssBaseline />
       <Box sx={{ position: "absolute", top: "80px", left: "9px" }}>
         <Button onClick={() => dispatch(toggleDarkMode())}>
-          <SettingsBrightnessIcon sx={{ mr: 0.5 }} />{" "}
-          {darkMode ? "Dark Mode" : "Light Mode"}
+          <SettingsBrightnessIcon sx={{ mr: 0.5 }} /> {darkMode ? "Dark Mode" : "Light Mode"}
         </Button>
       </Box>
       <Box
