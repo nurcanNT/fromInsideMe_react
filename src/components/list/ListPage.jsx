@@ -125,12 +125,13 @@ const ListPage = () => {
 
   const handleSearch = (e) => {
     const searchText = e.target.value.toLowerCase();
+  
     const filteredUsers = userList.filter((user) => {
       const username = user.username ? user.username.toLowerCase() : "";
       const email = user.email ? user.email.toLowerCase() : "";
       const city = user.city ? user.city.toLowerCase() : "";
       const infoText = user.infoText ? user.infoText.toLowerCase() : "";
-
+  
       return (
         username.includes(searchText) ||
         email.includes(searchText) ||
@@ -138,8 +139,11 @@ const ListPage = () => {
         infoText.includes(searchText)
       );
     });
+  
     setFilteredUsers(filteredUsers);
+    setCurrentPage(1); 
   };
+  
 
   useEffect(() => {
     setFilteredUsers(userList);
@@ -152,7 +156,7 @@ const ListPage = () => {
   const currentUsers = filteredUsers.slice(
     (currentPage - 1) * usersPerPage,
     currentPage * usersPerPage
-  );
+  );  
 
   const CollapsibleRow = ({ user, isOpen, onRowClick }) => {
     const [comment, setComment] = useState("");
