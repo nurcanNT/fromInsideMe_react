@@ -3,6 +3,7 @@ import { AvatarContainer, Nav, Username } from "./MenuStyle";
 import { NavItem } from "./MenuStyle";
 import { StyledNavLink } from "./MenuStyle";
 import Avatar from '@mui/material/Avatar';
+import StarIcon from "@mui/icons-material/Star";
 import SvgIcon from '@mui/material/SvgIcon';
 import { useSelector, useDispatch } from 'react-redux';
 import { Divider, IconButton, ListItemIcon, Menu, MenuItem, Tooltip } from "@mui/material";
@@ -151,6 +152,18 @@ const MenuHeader = () => {
           }}
         >
           <Avatar sx={{ backgroundColor: darkMode ? "#616161" : "#C0C0C0", color: "#fff"}} /> My account
+        </MenuItem>
+        <MenuItem 
+          onClick={handleClose}
+          sx={{
+            '&:hover': {
+              backgroundColor: darkMode ? "#616161" : '#f0f0f0',
+            },
+          }}
+        >
+          <Avatar sx={{ backgroundColor: darkMode ? "#616161" : "#C0C0C0", color: "#fff"}}>
+          <StarIcon />
+        </Avatar> Favorite Comments
         </MenuItem>
         <Divider />
         <MenuItem 
