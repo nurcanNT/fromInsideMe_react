@@ -28,11 +28,14 @@ import SettingsBrightnessIcon from "@mui/icons-material/SettingsBrightness";
 import { toggleDarkMode } from "../../actions.js";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
+import StarIcon from "@mui/icons-material/Star";
 
 const ListPage = () => {
   const [userList, setUserList] = useState(() => {
     return JSON.parse(localStorage.getItem("userList")) || [];
   });
+  const [favorites, setFavorites] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState(userList);
   const [currentPage, setCurrentPage] = useState(1);
   const usersPerPage = 10;
@@ -75,6 +78,14 @@ const ListPage = () => {
       },
     },
   });
+
+  const addToFavorites = (comment) => {
+    setFavorites([...favorites, comment]);
+  };
+
+  const removeFromFavorites = (comment) => {
+    setFavorites(favorites.filter((fav) => fav.comment !== comment.comment));
+  };
 
   const updatedStyles = {
     ...styles,
@@ -158,7 +169,7 @@ const ListPage = () => {
     currentPage * usersPerPage
   );  
 
-  const CollapsibleRow = ({ user, isOpen, onRowClick }) => {
+  const CollapsibleRow = ({ user, isOpen, onRowClick, addToFavorites, removeFromFavorites, favorites }) => {
     const [comment, setComment] = useState("");
     const currentUser = useSelector((state) => state.auth.user);
     const [comments, setComments] = useState(() => {
@@ -179,6 +190,14 @@ const ListPage = () => {
         const newComment = { date: new Date().toLocaleDateString(), username: currentUser.username, comment: comment };
         setComments([...comments, newComment]);
         setComment("");
+      }
+    };
+
+    const handleFavoriteToggle = (comment) => {
+      if (favorites.some((fav) => fav.comment === comment.comment)) {
+        removeFromFavorites(comment);
+      } else {
+        addToFavorites(comment);
       }
     };
 
@@ -203,53 +222,66 @@ const ListPage = () => {
           <TableCell>{user.infoText}</TableCell>
         </TableRow>
         <TableRow>
-          <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={5}>
-            <Collapse in={isOpen} timeout="auto" unmountOnExit>
-              <Box sx={{ margin: 1 }}>
-                <Typography variant="h6" gutterBottom component="div">
-                  Comments
-                </Typography>
-                {comments.length > 0 ? (
-                  <Table size="small" aria-label="comments">
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>Date</TableCell>
-                        <TableCell>Username</TableCell>
-                        <TableCell>Comment</TableCell>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={5}>
+          <Collapse in={isOpen} timeout="auto" unmountOnExit>
+            <Box sx={{ margin: 1 }}>
+              <Typography variant="h6" gutterBottom component="div">
+                Comments
+              </Typography>
+              {comments.length > 0 ? (
+                <Table size="small" aria-label="comments">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Favorite</TableCell>
+                      <TableCell>Date</TableCell>
+                      <TableCell>Username</TableCell>
+                      <TableCell>Comment</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {comments.map((comment, index) => (
+                      <TableRow key={index}>
+                        <TableCell>
+                          <IconButton
+                            aria-label="favorite comment"
+                            onClick={() => handleFavoriteToggle(comment)}
+                          >
+                            {favorites.some((fav) => fav.comment === comment.comment) ? (
+                              <StarIcon sx={{ color: "gold" }} />
+                            ) : (
+                              <StarBorderIcon />
+                            )}
+                          </IconButton>
+                        </TableCell>
+                        <TableCell>{comment.date}</TableCell>
+                        <TableCell>{comment.username}</TableCell>
+                        <TableCell>{comment.comment}</TableCell>
                       </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {comments.map((comment, index) => (
-                        <TableRow key={index}>
-                          <TableCell>{comment.date}</TableCell>
-                          <TableCell>{comment.username}</TableCell>
-                          <TableCell>{comment.comment}</TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                ) : (
-                  <Typography>No comments</Typography>
-                )}
-                <TextField
-                  sx={{ width: "100%", marginTop: 2 }}
-                  multiline
-                  rows={2}
-                  value={comment}
-                  onChange={handleCommentChange}
-                  placeholder="Add a comment"
-                />
-                <Button
-                  variant="contained"
-                  sx={{ marginTop: 1 }}
-                  onClick={handleCommentSubmit}
-                >
-                  Add Comment
-                </Button>
-              </Box>
-            </Collapse>
-          </TableCell>
-        </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              ) : (
+                <Typography>No comments</Typography>
+              )}
+              <TextField
+                sx={{ width: "100%", marginTop: 2 }}
+                multiline
+                rows={2}
+                value={comment}
+                onChange={handleCommentChange}
+                placeholder="Add a comment"
+              />
+              <Button
+                variant="contained"
+                sx={{ marginTop: 1 }}
+                onClick={handleCommentSubmit}
+              >
+                Add Comment
+              </Button>
+            </Box>
+          </Collapse>
+        </TableCell>
+      </TableRow>
       </>
     );
   };
@@ -389,11 +421,13 @@ const ListPage = () => {
               <TableBody>
                 {currentUsers.map((user, index) => (
                   <CollapsibleRow
-                    key={index}
-                    user={user}
-                    isOpen={openRow === user.username}
-                    onRowClick={(username) => setOpenRow(openRow === username ? null : username)}
-                  />
+                  user={user}
+                  isOpen={openRow === user.username}
+                  onRowClick={(username) => setOpenRow(openRow === username ? null : username)}
+                  addToFavorites={addToFavorites}
+                  removeFromFavorites={removeFromFavorites}
+                  favorites={favorites}
+                />
                 ))}
               </TableBody>
             </Table>
