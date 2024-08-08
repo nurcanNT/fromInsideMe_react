@@ -371,7 +371,7 @@ const ListPage = () => {
           onChange={handleSearch}
         />
 
-        <Typography variant="h4" style={{ marginBottom: "10px" }}>
+        <Typography variant="h4" style={{ marginBottom: "10px", marginLeft: "47px" }}>
           User List
         </Typography>
         <Box sx={{ width: '95%', maxHeight: '600px', overflow: 'auto', margin: 'auto' }}>
