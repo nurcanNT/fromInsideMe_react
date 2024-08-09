@@ -51,7 +51,7 @@ const MenuHeader = () => {
 
   const handleProfile = () => {
     dispatch(updateProfile());
-    navigate("/profile/AccountProfile");
+    navigate("/profile/Profile");
   };
 
   const getInitial = (username) => {

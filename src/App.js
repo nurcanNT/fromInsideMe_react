@@ -8,7 +8,7 @@ import "./App.css";
 
 import LoginForm from "./components/login/LoginForm";
 import Register from "./components/register/Register";
-import AccountProfile from './components/profile/AccountProfile'; 
+import Profile from './components/profile/Profile'; 
 import { useSelector } from 'react-redux';
 
 const theme = createTheme({
@@ -30,7 +30,7 @@ const App = () => {
             <Route path="/homePage/HomePage" element={<HomePage />} />
             <Route path="/myContents/MyContents" element={<MyContents />} />
             <Route path="/list/ListPage" element={<ListPage />} />
-            <Route path="/profile/AccountProfile" element={<AccountProfile />} />
+            <Route path="/profile/Profile" element={<Profile />} />
           </Routes>
       </Router>
     </ThemeProvider>
