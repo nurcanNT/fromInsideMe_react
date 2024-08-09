@@ -17,7 +17,7 @@ const timezones = [
   { value: 'New York', label: 'New York' },
 ];
 
-const AccountProfile = () => {
+const Profile = () => {
   const user = useSelector(state => state.auth.user);
   const [fullName, setFullName] = useState(user ? user.username : '');
   const [email, setEmail] = useState(user ? user.email : '');
@@ -83,7 +83,7 @@ const AccountProfile = () => {
             </Button>
           </Box>
           <ProfileContainer >
-            <Typography variant="h4">Account</Typography>
+            <Typography variant="h4">Profile Information</Typography>
             <ProfileForm>
               <TextField
                 label="Username"
@@ -139,4 +139,4 @@ const AccountProfile = () => {
   );
 };
 
-export default AccountProfile;
+export default Profile;
