@@ -9,7 +9,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Divider, IconButton, ListItemIcon, Menu, MenuItem, Tooltip } from "@mui/material";
 import { Logout, PersonAdd, Settings } from "@mui/icons-material";
 import { useNavigate } from 'react-router-dom';
-import { logout, updateProfile } from "../../actions";
+import { logout, updateProfile, updateAccount } from "../../actions";
 
 function HomeIcon(props) {
   return (
@@ -52,6 +52,11 @@ const MenuHeader = () => {
   const handleProfile = () => {
     dispatch(updateProfile());
     navigate("/profile/Profile");
+  };
+
+  const handleMyAccount = () => {
+    dispatch(updateAccount());
+    navigate("/myAccount/MyAccount");
   };
 
   const getInitial = (username) => {
@@ -144,7 +149,7 @@ const MenuHeader = () => {
           <Avatar sx={{ backgroundColor: darkMode ? "#616161" : "#C0C0C0", color: "#fff" }} /> Profile
         </MenuItem>
         <MenuItem 
-          onClick={handleClose}
+          onClick={handleMyAccount}
           sx={{
             '&:hover': {
               backgroundColor: darkMode ? "#616161" : '#f0f0f0',

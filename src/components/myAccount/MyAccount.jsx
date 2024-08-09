@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Box, Button, Container, TextField, MenuItem, Typography, CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 import { styled } from '@mui/system';
 import MenuHeader from '../menu/MenuHeader'; 
-import SideBar from '../SideBar';
+import SideMenuAccount from './SideMenuAccount';
 import { updateProfile, toggleDarkMode } from '../../actions'; 
 import SettingsBrightnessIcon from "@mui/icons-material/SettingsBrightness";
 
@@ -74,7 +74,7 @@ const Profile = () => {
         }}>
       <MenuHeader />
       <Box sx={{ display: 'flex' }}>
-        <SideBar />
+        <SideMenuAccount/>
         <Box sx={{ flexGrow: 1, padding: 3, marginLeft: '240px', marginTop: '64px' }}>
           <Box sx={{ position: "absolute", top: "80px" }}>
             <Button onClick={() => dispatch(toggleDarkMode())}>
@@ -83,7 +83,7 @@ const Profile = () => {
             </Button>
           </Box>
           <ProfileContainer >
-            <Typography variant="h4">Profile Information</Typography>
+            <Typography variant="h4">My Account</Typography>
             <ProfileForm>
               <TextField
                 label="Username"
@@ -92,41 +92,6 @@ const Profile = () => {
                 margin="normal"
                 fullWidth
               />
-              <TextField
-                label="Email Adresi"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                margin="normal"
-                fullWidth
-              />
-              <TextField
-                select
-                label="Timezone"
-                value={timezone}
-                onChange={(e) => setTimezone(e.target.value)}
-                margin="normal"
-                fullWidth
-              >
-                {timezones.map((option) => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </TextField>
-              <TextField
-                select
-                label="Language"
-                value={language}
-                onChange={(e) => setLanguage(e.target.value)}
-                margin="normal"
-                fullWidth
-              >
-                {languages.map((option) => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </TextField>
               <Button variant="contained" color="primary" onClick={handleSave} style={{ marginTop: 16 }}>
                 Submit
               </Button>
