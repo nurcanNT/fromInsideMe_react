@@ -5,10 +5,10 @@ import HomePage from './components/homePage/HomePage';
 import MyContents from './components/myContents/MyContents';
 import ListPage from './components/list/ListPage';
 import "./App.css";
-
+import MyAccount from './components/myAccount/MyAccount'
 import LoginForm from "./components/login/LoginForm";
 import Register from "./components/register/Register";
-import Profile from './components/profile/Profile'; 
+import Profile from './components/profileMenu/Profile'; 
 import { useSelector } from 'react-redux';
 
 const theme = createTheme({
@@ -31,6 +31,7 @@ const App = () => {
             <Route path="/myContents/MyContents" element={<MyContents />} />
             <Route path="/list/ListPage" element={<ListPage />} />
             <Route path="/profile/Profile" element={<Profile />} />
+            <Route path="/myAccount/MyAccount" element={<MyAccount/>} />
           </Routes>
       </Router>
     </ThemeProvider>

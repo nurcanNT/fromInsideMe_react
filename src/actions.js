@@ -5,6 +5,7 @@ export const CREATE = 'CREATE';
 export const ADD_USER = 'ADD_USER';
 export const TOGGLE_DARK_MODE = 'TOGGLE_DARK_MODE';
 export const UPDATE_PROFILE = 'UPDATE_PROFILE';
+export const UPDATE_ACCOUNT = 'UPDATE_ACCOUNT';
 
 export const login = (user) => ({
   type: LOGIN,
@@ -37,4 +38,9 @@ export const toggleDarkMode = () => ({
 export const updateProfile = (profile) => ({
   type: UPDATE_PROFILE,
   payload: profile,
+});
+
+export const updateAccount = (myAccount) => ({
+  type: UPDATE_ACCOUNT,
+  payload: myAccount,
 });
