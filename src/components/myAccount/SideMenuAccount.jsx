@@ -1,8 +1,8 @@
 import React from 'react';
 import { Box, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import { styled } from '@mui/system';
+import DraftsIcon from '@mui/icons-material/Drafts';
 import MailIcon from '@mui/icons-material/Mail';
-import NoteIcon from '@mui/icons-material/Note';
 
 const SideBarContainer = styled(Box)(({ theme }) => ({
   width: 270,
@@ -22,13 +22,13 @@ const SideBar = () => (
     <List>
       <ListItem button>
         <ListItemIcon>
-          <MailIcon />
+          <DraftsIcon />  
         </ListItemIcon>
         <ListItemText primary="My Comments" />
       </ListItem>
       <ListItem button>
         <ListItemIcon>
-          <MailIcon /> 
+          <MailIcon />
         </ListItemIcon>
         <ListItemText primary="Commenters" />
       </ListItem>
