@@ -3,7 +3,6 @@ import { Box, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import { styled } from '@mui/system';
 import MailIcon from '@mui/icons-material/Mail';
 import NoteIcon from '@mui/icons-material/Note';
-import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 
 const SideBarContainer = styled(Box)(({ theme }) => ({
   width: 270,
@@ -25,19 +24,13 @@ const SideBar = () => (
         <ListItemIcon>
           <MailIcon />
         </ListItemIcon>
-        <ListItemText primary="Communication" />
+        <ListItemText primary="My Comments" />
       </ListItem>
       <ListItem button>
         <ListItemIcon>
-          <NoteIcon />
+          <MailIcon />  {/* Bu satırı ekledik */}
         </ListItemIcon>
-        <ListItemText primary="Notes and Highlights" />
-      </ListItem>
-      <ListItem button>
-        <ListItemIcon>
-          <CalendarTodayIcon />
-        </ListItemIcon>
-        <ListItemText primary="Calendar Sync" />
+        <ListItemText primary="Commenters" />
       </ListItem>
     </List>
   </SideBarContainer>
