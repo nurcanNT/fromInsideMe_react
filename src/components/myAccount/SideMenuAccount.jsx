@@ -28,7 +28,7 @@ const SideBar = () => (
       </ListItem>
       <ListItem button>
         <ListItemIcon>
-          <MailIcon />  {/* Bu satırı ekledik */}
+          <MailIcon /> 
         </ListItemIcon>
         <ListItemText primary="Commenters" />
       </ListItem>
