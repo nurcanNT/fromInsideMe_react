@@ -21,7 +21,10 @@ const SideBar = () => (
   <SideBarContainer>
     <List>
       <ListItem button>
-        
+        <ListItemIcon>
+          <DraftsIcon />  
+        </ListItemIcon>
+        <ListItemText primary="My Comments" />
       </ListItem>
       <ListItem button>
         <ListItemIcon>
