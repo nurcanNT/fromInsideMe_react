@@ -96,6 +96,18 @@ const Profile = () => {
                 Submit
               </Button>
             </ProfileForm>
+            <ProfileForm>
+              <TextField
+                label="Username"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                margin="normal"
+                fullWidth
+              />
+              <Button variant="contained" color="primary" onClick={handleSave} style={{ marginTop: 16 }}>
+                Submit
+              </Button>
+            </ProfileForm>
           </ProfileContainer>
         </Box>
       </Box>
