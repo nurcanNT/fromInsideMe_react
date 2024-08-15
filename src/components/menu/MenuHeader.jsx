@@ -4,6 +4,7 @@ import { NavItem } from "./MenuStyle";
 import { StyledNavLink } from "./MenuStyle";
 import Avatar from '@mui/material/Avatar';
 import StarIcon from "@mui/icons-material/Star";
+import SearchIcon from '@mui/icons-material/Search';
 import SvgIcon from '@mui/material/SvgIcon';
 import { useSelector, useDispatch } from 'react-redux';
 import { Divider, IconButton, ListItemIcon, Menu, MenuItem, Tooltip } from "@mui/material";
@@ -66,6 +67,13 @@ const MenuHeader = () => {
   return (
     <Nav style={navStyles}>
       <ul>
+        <NavItem>
+        </NavItem>
+        <NavItem>
+          <IconButton sx={{ color: darkMode ? "#000" : "#000" }}>
+            <SearchIcon />
+          </IconButton>
+        </NavItem>
         <NavItem>
           <StyledNavLink exact to="/homePage/HomePage">
             <HomeIcon style={{ marginBottom: '1px' }} />
