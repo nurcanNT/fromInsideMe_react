@@ -70,9 +70,11 @@ const MenuHeader = () => {
         <NavItem>
         </NavItem>
         <NavItem>
-          <IconButton sx={{ color: darkMode ? "#000" : "#000" }}>
-            <SearchIcon />
-          </IconButton>
+        <img src="/image/from.png" alt="From Logo" style={{
+              width: "25%",
+              height: "20%",
+              objectFit: "cover",
+            }}/>
         </NavItem>
         <NavItem>
           <StyledNavLink exact to="/homePage/HomePage">
