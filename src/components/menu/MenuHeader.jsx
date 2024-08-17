@@ -76,22 +76,7 @@ const MenuHeader = () => {
               objectFit: "cover",
             }}/>
         </NavItem>
-        <NavItem>
-          <StyledNavLink exact to="/homePage/HomePage">
-            <HomeIcon style={{ marginBottom: '1px' }} />
-            Home Page
-          </StyledNavLink>
-        </NavItem>
-        <NavItem>
-          <StyledNavLink exact to="/myContents/MyContents">
-            My Contents
-          </StyledNavLink>
-        </NavItem>
-        <NavItem>
-          <StyledNavLink exact to="/list/ListPage">
-            List Page
-          </StyledNavLink>
-        </NavItem>
+       
         <AvatarContainer>
         <Tooltip title="Account settings">
           <IconButton
