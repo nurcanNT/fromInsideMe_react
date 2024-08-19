@@ -71,8 +71,9 @@ const MenuHeader = () => {
         </NavItem>
         <NavItem>
         <img src="/image/from.png" alt="From Logo" style={{
-              width: "25%",
-              height: "20%",
+              width: "200px",
+              height: "45px",
+              marginRight: "270px",
               objectFit: "cover",
             }}/>
         </NavItem>

@@ -11,6 +11,7 @@ export const Nav = styled.nav`
     background-color: #f0f0f0;
     padding: 10px;
     border-radius: 8px;
+    height: 65px;
   }
 `;
 
@@ -44,9 +45,6 @@ export const StyledNavLink = styled(NavLink)`
 `;
 
 export const AvatarContainer = styled.div`
-  display: flex;
-  align-items: center;
-  margin-left: auto;
   font-size: 18px;
 `;
 
