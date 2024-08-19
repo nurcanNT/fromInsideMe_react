@@ -75,10 +75,10 @@ const Profile = () => {
       <MenuHeader />
       <Box sx={{ display: 'flex' }}>
         <SideMenuAccount/>
-        <Box sx={{ flexGrow: 1, padding: 3, marginLeft: '240px', marginTop: '64px' }}>
+        <Box sx={{ flexGrow: 1, padding: 3, marginLeft: '300px', marginTop: '64px' }}>
           <Box sx={{ position: "absolute", top: "80px" }}>
             <Button onClick={() => dispatch(toggleDarkMode())}>
-              <SettingsBrightnessIcon sx={{ mr: 0.5 }} />{" "}
+              <SettingsBrightnessIcon sx={{ ml: 0.5 }} />{" "}
               {darkMode ? "Dark Mode" : "Light Mode"}
             </Button>
           </Box>
