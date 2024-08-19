@@ -304,7 +304,7 @@ const ListPage = () => {
         }}
       >
         <MenuHeader />
-        <Box sx={{ marginLeft: "80%", marginTop: "1rem" }}>
+        <Box sx={{ marginLeft: "91%", marginTop: "1rem" }}>
           <Button variant="contained" onClick={() => setOpenModal(true)}>
             List Create
           </Button>
