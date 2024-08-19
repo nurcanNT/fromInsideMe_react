@@ -87,7 +87,7 @@ const MyContents = () => {
   return (
     <Box sx={{ padding: 1 }}>
       <MenuHeader />
-      <Box sx={{ textAlign: "center", marginTop: "20px" }}>
+      <Box sx={{ textAlign: "right", marginTop: "20px", marginRight: "40px" }}>
         <Button
           variant="contained"
           color="primary"
