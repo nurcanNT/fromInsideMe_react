@@ -81,7 +81,7 @@ const MenuHeader = () => {
         </NavItem>
         <NavItem>
           <StyledNavLink exact to="/homePage/HomePage">
-            <HomeIcon style={{ marginBottom: '1px' }} />
+            <HomeIcon style={{ marginBottom: '1px', color:  darkMode ? "#333" : "#000" }} />
             Home Page
           </StyledNavLink>
         </NavItem>
