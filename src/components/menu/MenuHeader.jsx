@@ -10,6 +10,7 @@ import SvgIcon from '@mui/material/SvgIcon';
 import { useSelector, useDispatch } from 'react-redux';
 import { Divider, IconButton, ListItemIcon, Menu, MenuItem, Tooltip } from "@mui/material";
 import { Logout, PersonAdd, Settings } from "@mui/icons-material";
+import ListIcon from '@mui/icons-material/List';
 import { useNavigate } from 'react-router-dom';
 import { logout, updateProfile, updateAccount } from "../../actions";
 
@@ -84,19 +85,23 @@ const MenuHeader = () => {
             Home Page
           </StyledNavLink>
         </NavItem>
-        <NavItem>
-          <StyledNavLink exact to="/myContents/MyContents">
-          <ListItemIcon>
-          <DraftsIcon style={{color: darkMode ? "#000" : "#000", marginLeft: "20px"}} />  
-        </ListItemIcon>
-            My Contents
-          </StyledNavLink>
-        </NavItem>
-        <NavItem>
-          <StyledNavLink exact to="/list/ListPage">
-            List Page
-          </StyledNavLink>
-        </NavItem>
+<NavItem>
+  <StyledNavLink exact to="/myContents/MyContents">
+    <ListItemIcon>
+      <DraftsIcon style={{ color: darkMode ? "#000" : "#000", marginLeft: "20px" }} />  
+    </ListItemIcon>
+    My Contents
+  </StyledNavLink>
+</NavItem>
+<NavItem>
+  <StyledNavLink exact to="/list/ListPage">
+    <ListItemIcon>
+      <ListIcon style={{ color: darkMode ? "#000" : "#000", marginLeft: "20px" }} /> 
+    </ListItemIcon>
+    List Page
+  </StyledNavLink>
+</NavItem>
+
         <NavItem>
           <StyledNavLink exact to="/list/ListPage">
             Page
