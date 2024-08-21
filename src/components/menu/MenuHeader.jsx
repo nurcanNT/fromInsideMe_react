@@ -85,23 +85,22 @@ const MenuHeader = () => {
             Home Page
           </StyledNavLink>
         </NavItem>
-<NavItem>
-  <StyledNavLink exact to="/myContents/MyContents">
-    <ListItemIcon>
-      <DraftsIcon style={{ color: darkMode ? "#000" : "#000", marginLeft: "20px" }} />  
-    </ListItemIcon>
-    My Contents
-  </StyledNavLink>
-</NavItem>
-<NavItem>
-  <StyledNavLink exact to="/list/ListPage">
-    <ListItemIcon>
-      <ListIcon style={{ color: darkMode ? "#000" : "#000", marginLeft: "20px" }} /> 
-    </ListItemIcon>
-    List Page
-  </StyledNavLink>
-</NavItem>
-
+        <NavItem>
+          <StyledNavLink exact to="/myContents/MyContents">
+            <ListItemIcon>
+              <DraftsIcon style={{ color: darkMode ? "#000" : "#000", marginLeft: "20px" }} />  
+            </ListItemIcon>
+            My Contents
+          </StyledNavLink>
+        </NavItem>
+        <NavItem>
+          <StyledNavLink exact to="/list/ListPage">
+            <ListItemIcon>
+              <ListIcon style={{ color: darkMode ? "#000" : "#000", marginLeft: "20px" }} /> 
+            </ListItemIcon>
+            List Page
+          </StyledNavLink>
+        </NavItem>
         <NavItem>
           <StyledNavLink exact to="/list/ListPage">
             Page
