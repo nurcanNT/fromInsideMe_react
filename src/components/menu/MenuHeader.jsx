@@ -5,6 +5,7 @@ import { StyledNavLink } from "./MenuStyle";
 import Avatar from '@mui/material/Avatar';
 import StarIcon from "@mui/icons-material/Star";
 import SearchIcon from '@mui/icons-material/Search';
+import DraftsIcon from '@mui/icons-material/Drafts';
 import SvgIcon from '@mui/material/SvgIcon';
 import { useSelector, useDispatch } from 'react-redux';
 import { Divider, IconButton, ListItemIcon, Menu, MenuItem, Tooltip } from "@mui/material";
@@ -85,6 +86,9 @@ const MenuHeader = () => {
         </NavItem>
         <NavItem>
           <StyledNavLink exact to="/myContents/MyContents">
+          <ListItemIcon>
+          <DraftsIcon style={{color: darkMode ? "#000" : "#000", marginLeft: "20px"}} />  
+        </ListItemIcon>
             My Contents
           </StyledNavLink>
         </NavItem>
