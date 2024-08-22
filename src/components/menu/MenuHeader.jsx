@@ -82,7 +82,7 @@ const MenuHeader = () => {
         <NavItem>
           <StyledNavLink exact to="/homePage/HomePage">
             <HomeIcon style={{ marginBottom: '1px', color:  darkMode ? "#333" : "#000" }} />
-            Home Page
+            HomePage
           </StyledNavLink>
         </NavItem>
         <NavItem>
@@ -98,7 +98,7 @@ const MenuHeader = () => {
             <ListItemIcon>
               <ListIcon style={{ color: darkMode ? "#000" : "#000", marginLeft: "20px" }} /> 
             </ListItemIcon>
-            List Page
+            ListPage
           </StyledNavLink>
         </NavItem>
         <AvatarContainer>
