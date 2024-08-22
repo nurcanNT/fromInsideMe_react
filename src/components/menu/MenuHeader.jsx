@@ -101,11 +101,6 @@ const MenuHeader = () => {
             List Page
           </StyledNavLink>
         </NavItem>
-        <NavItem>
-          <StyledNavLink exact to="/list/ListPage">
-            Page
-          </StyledNavLink>
-        </NavItem>
         <AvatarContainer>
         <Tooltip title="Account settings">
           <IconButton
