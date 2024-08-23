@@ -1,6 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Box, Button, Container, TextField, MenuItem, Typography, CssBaseline, ThemeProvider, createTheme } from '@mui/material';
+import { Box, Button, Container, TextField, MenuItem,ThemeProvider, createTheme,
+    Typography,
+    Modal,
+    CssBaseline,
+    Pagination,
+    TableContainer,
+    Table,
+    TableHead,
+    TableRow,
+    TableCell,
+    TableBody,
+    Paper,
+    Collapse,
+    IconButton, } from '@mui/material';
 import { styled } from '@mui/system';
 import MenuHeader from '../menu/MenuHeader'; 
 import { updateProfile, toggleDarkMode } from '../../actions'; 
@@ -24,6 +37,45 @@ const FavoriteComments = () => {
   const [language, setLanguage] = useState('en');
   const dispatch = useDispatch();
   const darkMode = useSelector((state) => state.theme.darkMode);
+  
+    const [currentPage, setCurrentPage] = useState(1);
+    const usersPerPage = 10;
+    const [userList, setUserList] = useState(() => {
+        return JSON.parse(localStorage.getItem("userList")) || [];
+  });
+    const [filteredUsers, setFilteredUsers] = useState(userList);
+
+  const handleSearch = (e) => {
+    const searchText = e.target.value.toLowerCase();
+  
+    const filteredUsers = userList.filter((user) => {
+      const username = user.username ? user.username.toLowerCase() : "";
+      const email = user.email ? user.email.toLowerCase() : "";
+      const city = user.city ? user.city.toLowerCase() : "";
+      const infoText = user.infoText ? user.infoText.toLowerCase() : "";
+  
+      return (
+        username.includes(searchText) ||
+        email.includes(searchText) ||
+        city.includes(searchText) ||
+        infoText.includes(searchText)
+      );
+    });
+  
+    setFilteredUsers(filteredUsers);
+    setCurrentPage(1); 
+  };
+  
+
+  useEffect(() => {
+    setFilteredUsers(userList);
+  }, [userList]);
+
+const currentUsers = filteredUsers.slice(
+    (currentPage - 1) * usersPerPage,
+    currentPage * usersPerPage
+  );  
+
 
   const theme = createTheme({
     palette: {
@@ -82,7 +134,21 @@ const FavoriteComments = () => {
           </Box>
           <ProfileContainer >
             <Typography variant="h4">Favorite Comments</Typography>
-            
+            <Box sx={{ width: '95%', maxHeight: '600px', overflow: 'auto', margin: 'auto' }}>
+          <TableContainer component={Paper}>
+            <Table aria-label="collapsible table">
+              <TableHead>
+                <TableRow>
+                  <TableCell />
+                  <TableCell>Username</TableCell>
+                  <TableCell>Email</TableCell>
+                  <TableCell>City</TableCell>
+                  <TableCell>Info Text</TableCell>
+                </TableRow>
+              </TableHead>
+            </Table>
+          </TableContainer>
+        </Box>
           </ProfileContainer>
         </Box>
       </Box>
