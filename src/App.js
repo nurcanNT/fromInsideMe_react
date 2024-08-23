@@ -9,6 +9,7 @@ import MyAccount from './components/myAccount/MyAccount'
 import LoginForm from "./components/login/LoginForm";
 import Register from "./components/register/Register";
 import Profile from './components/profileMenu/Profile'; 
+import FavoriteComments from './components/favoriteComments/FavoriteComments';
 import { useSelector } from 'react-redux';
 
 const theme = createTheme({
@@ -32,6 +33,7 @@ const App = () => {
             <Route path="/list/ListPage" element={<ListPage />} />
             <Route path="/profile/Profile" element={<Profile />} />
             <Route path="/myAccount/MyAccount" element={<MyAccount/>} />
+            <Route path="/favoriteComments/FavoriteComments" element={<FavoriteComments/>} />
           </Routes>
       </Router>
     </ThemeProvider>

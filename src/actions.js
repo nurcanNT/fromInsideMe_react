@@ -6,6 +6,7 @@ export const ADD_USER = 'ADD_USER';
 export const TOGGLE_DARK_MODE = 'TOGGLE_DARK_MODE';
 export const UPDATE_PROFILE = 'UPDATE_PROFILE';
 export const UPDATE_ACCOUNT = 'UPDATE_ACCOUNT';
+export const FAVORITE_COMMENTS = 'FAVORITE_COMMENTS';
 
 export const login = (user) => ({
   type: LOGIN,
@@ -44,3 +45,8 @@ export const updateAccount = (myAccount) => ({
   type: UPDATE_ACCOUNT,
   payload: myAccount,
 });
+
+export const favoriteComments = (favorite) => ({
+  type: FAVORITE_COMMENTS,
+  payload: favorite,
+})
