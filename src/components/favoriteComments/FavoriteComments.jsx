@@ -133,7 +133,7 @@ const currentUsers = filteredUsers.slice(
             </Button>
           </Box>
           <ProfileContainer >
-            <Typography variant="h4">Favorite Comments</Typography>
+            <Typography variant="h4" style={{marginBottom: '1em'}}>Favorite Comments</Typography>
             <Box sx={{ width: '95%', maxHeight: '600px', overflow: 'auto', margin: 'auto' }}>
           <TableContainer component={Paper}>
             <Table aria-label="collapsible table">
