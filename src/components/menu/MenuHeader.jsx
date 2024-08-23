@@ -12,7 +12,7 @@ import { Divider, IconButton, ListItemIcon, Menu, MenuItem, Tooltip } from "@mui
 import { Logout, PersonAdd, Settings } from "@mui/icons-material";
 import ListIcon from '@mui/icons-material/List';
 import { useNavigate } from 'react-router-dom';
-import { logout, updateProfile, updateAccount } from "../../actions";
+import { logout, updateProfile, updateAccount, favoriteComments } from "../../actions";
 
 function HomeIcon(props) {
   return (
@@ -60,6 +60,11 @@ const MenuHeader = () => {
   const handleMyAccount = () => {
     dispatch(updateAccount());
     navigate("/myAccount/MyAccount");
+  };
+
+  const handleFavoriteComments = () => {
+    dispatch(favoriteComments());
+    navigate("/favoriteComments/FavoriteComments");
   };
 
   const getInitial = (username) => {
@@ -183,7 +188,7 @@ const MenuHeader = () => {
           <Avatar sx={{ backgroundColor: darkMode ? "#616161" : "#C0C0C0", color: "#fff"}} /> My account
         </MenuItem>
         <MenuItem 
-          onClick={handleClose}
+          onClick={handleFavoriteComments}
           sx={{
             '&:hover': {
               backgroundColor: darkMode ? "#616161" : '#f0f0f0',

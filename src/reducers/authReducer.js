@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT, REGISTER, ADD_USER, UPDATE_PROFILE, UPDATE_ACCOUNT } from '../actions';
+import { LOGIN, LOGOUT, REGISTER, ADD_USER, UPDATE_PROFILE, UPDATE_ACCOUNT, FAVORITE_COMMENTS } from '../actions';
 
 const initialState = {
   isAuthenticated: false,
@@ -44,6 +44,14 @@ const authReducer = (state = initialState, action) => {
         },
       };
       case UPDATE_ACCOUNT:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          ...action.payload,
+        },
+      };
+      case FAVORITE_COMMENTS:
       return {
         ...state,
         user: {
