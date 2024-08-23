@@ -11,7 +11,7 @@ const SideBarContainer = styled(Box)(({ theme }) => ({
   boxShadow: theme.shadows[2],
   padding: theme.spacing(2),
   position: 'fixed',
-  top: '70px',
+  top: '75px',
   left: 0,
   bottom: 0,
   overflowY: 'auto',
