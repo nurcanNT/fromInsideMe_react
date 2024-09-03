@@ -230,7 +230,14 @@ const ListPage = () => {
               </Typography>
               {comments.length > 0 ? (
                 <Table size="small" aria-label="comments">
-                  
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Favorite</TableCell>
+                      <TableCell>Date</TableCell>
+                      <TableCell>Username</TableCell>
+                      <TableCell>Comment</TableCell>
+                    </TableRow>
+                  </TableHead>
                   <TableBody>
                     {comments.map((comment, index) => (
                       <TableRow key={index}>
